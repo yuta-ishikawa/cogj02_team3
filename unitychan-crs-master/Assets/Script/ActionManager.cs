@@ -28,6 +28,14 @@ public class ActionManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		action_order_list.Add (0);
+		action_order_list.Add (1);
+		action_order_list.Add (2);
+		action_order_list.Add (3);
+		action_order_list.Add (4);
+		action_order_list.Add (5);
+
+
 		top_left = GameObject.Find("top_left");
 		top_center = GameObject.Find("top_center");
 		top_right = GameObject.Find("top_right");
@@ -57,15 +65,15 @@ public class ActionManager : MonoBehaviour {
 	void RegisterEvent(GameObject icon, Icon icon_enum) {
 		EventTrigger.Entry entry = new EventTrigger.Entry();
 		entry.eventID = EventTriggerType.PointerEnter;
-		entry.callback.AddListener( (x) => { input_order_list.Add((int)icon_enum); DebugInput(); } );
+		entry.callback.AddListener( (x) => { input_order_list.Add((int)icon_enum); DebugInput(); Event();} );
 
 		EventTrigger.Entry pointer_down = new EventTrigger.Entry();
 		pointer_down.eventID = EventTriggerType.PointerDown;
-		pointer_down.callback.AddListener( (x) => { input_order_list.Add((int)icon_enum); DebugInput(); } );
+		pointer_down.callback.AddListener( (x) => { input_order_list.Add((int)icon_enum); DebugInput(); Event();} );
 
 		EventTrigger.Entry pointer_up = new EventTrigger.Entry();
 		pointer_up.eventID = EventTriggerType.PointerUp;
-		pointer_up.callback.AddListener( (x) => { input_order_list.Add((int)Icon.POINTER_UP); DebugInput(); } );
+		pointer_up.callback.AddListener( (x) => { input_order_list.Add((int)Icon.POINTER_UP); DebugInput(); Event();} );
 
 		EventTrigger trigger = icon.GetComponent<EventTrigger>();
 		trigger.triggers.Add(entry);
@@ -74,7 +82,28 @@ public class ActionManager : MonoBehaviour {
 	}
 
 //	void 
+	void Event()
+	{
+		if (Compare()) {
+			Debug.Log ("Success");
+		}
 
+	}
+
+	bool Compare(){
+		int count;
+		if (input_order_list.Count < action_order_list.Count) {
+			return false;
+		}
+
+		for (int i = input_order_list.Count - 1; i >= 0; i--)
+		{
+			if (action_order_list [i] != input_order_list [i]) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	void DebugInput() {
 		string str = "";
