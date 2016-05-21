@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonMonoBehaviour<GameManager> {
 
@@ -30,5 +31,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 
 	public void AddScore(JudgementState judge) {
 		scoreList [(int)judge]++;
+	}
+
+	public void ChangeScene(string sceneName){
+		SceneManager.LoadScene (sceneName);
 	}
 }
