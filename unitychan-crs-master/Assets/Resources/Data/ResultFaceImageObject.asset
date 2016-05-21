@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2a56a7041cca04582199995bc1d990, type: 3}
+  m_Name: ResultFaceImageObject
+  m_EditorClassIdentifier: 
+  _textures:
+  - {fileID: 2800000, guid: d5cbcb22616b0402db13890f6ca03a75, type: 3}
+  - {fileID: 2800000, guid: b928cea14fa344e4c959718c5697271a, type: 3}
+  - {fileID: 2800000, guid: b8aa78523435b4641a484f343fe962bd, type: 3}
+  - {fileID: 2800000, guid: f80af3c7269b2b14e8e833c21048cfe2, type: 3}
+  - {fileID: 2800000, guid: c9fe7b7d5d0d44fc0bd8e766fe1ee246, type: 3}

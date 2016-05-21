@@ -7,7 +7,7 @@ public class FadeParam
 {
 	[SerializeField]
 	private float _time = 0.0f;
-	public float time
+	public	float time
 	{
 		get { return _time; }
 		private set { _time = value; }
@@ -15,7 +15,7 @@ public class FadeParam
 
 	[SerializeField]
 	private Color _color = new Color(0.0f, 0.0f, 0.0f);
-	public Color color
+	public	Color color
 	{
 		get { return _color; }
 		private set { _color = value; }

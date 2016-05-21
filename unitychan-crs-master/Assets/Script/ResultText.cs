@@ -2,8 +2,12 @@
 using System.Collections;
 using UnityEngine.UI;
 
-// リザルト画面に表示するユニティちゃんの表情を変更する
-public class ResultFaceChanger : MonoBehaviour {
+public class ResultText : MonoBehaviour {
+
+	[SerializeField, Tooltip("表示テキストデータオブジェクト")]
+	private ResultTextObject textObj;
+	[SerializeField]
+	private Text resultText;
 
 	// ここはGameManagerクラスが確立したら消す
 	private enum ScoreRank
@@ -11,34 +15,29 @@ public class ResultFaceChanger : MonoBehaviour {
 		None = -1, TooBad, Bad, Good, Great, Perfect
 	};
 
-	[SerializeField]
-	private RawImage faceRawImage = null;
-	[SerializeField]
-	private ResultFaceImageObject images;
 	[SerializeField, Tooltip("デバッグ兼確認用")]
 	private ScoreRank rank = ScoreRank.None;
 
-	private void SetFaceImage()
+	private void SetTextData()
 	{
 		// 異常値チェック
-		if(rank == ScoreRank.None)
+		if (rank == ScoreRank.None)
 		{
 			Debug.LogAssertion("Rank Is Assertion!!!!");
 			return;
 		}
-		
+
 		// ランクに応じて表情設定
-		faceRawImage.texture = images.textures[(int)rank];
+		resultText.text = textObj.texts[(int)rank];
 
 		// nullチェック
-		if (faceRawImage.texture != null) return;
+		if (!string.IsNullOrEmpty(resultText.text)) return;
 
-		Debug.LogAssertion(rank + "Texture Is null!!!!");
-}
+		Debug.LogAssertion(rank + "Text Is null!!!!");
+	}
 
 	// Use this for initialization
 	void Start () {
-		SetFaceImage();
+		SetTextData();
 	}
-	
 }
