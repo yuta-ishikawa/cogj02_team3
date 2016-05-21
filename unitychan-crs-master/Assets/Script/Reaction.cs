@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Reaction : MonoBehaviour {
 
@@ -12,22 +13,20 @@ public class Reaction : MonoBehaviour {
 		GREAT,
 		PERFECT
 	}
-	judgementState judge;
 
 	[SerializeField]
 	private Sprite[] judgeResultSprites;
 	[SerializeField]
 	private GameObject jugmentResultImage;
 
-	// Use this for initialization
+	private List<int> scoreList;
+
 	void Start () {
-		judge = judgementState.GOOD;
-		CreateReaction (judge, Vector3.zero);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		scoreList = new List<int> ();
+		for (int i = 0; i <= (int)judgementState.PERFECT; i++) {
+			scoreList.Add (0);
+		}
+		CreateReaction (judgementState.PERFECT, Vector3.zero); //DBEUG
 	}
 
 	void CreateReaction(judgementState judge, Vector3 judgeResultPosition) {
@@ -60,5 +59,13 @@ public class Reaction : MonoBehaviour {
 			break;
 		}
 		AudioManager.Instance.PlaySE(voiceName);
+
+		// スコア加算
+		scoreList[(int)judge]++;
+		Debug.Log (scoreList [(int)judge]);
+	}
+
+	public List<int> GetScoreList(){
+		return scoreList;
 	}
 }
