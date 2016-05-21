@@ -29,7 +29,7 @@ public class Reaction : MonoBehaviour {
 		CreateReaction (judgementState.PERFECT, Vector3.zero); //DBEUG
 	}
 
-	void CreateReaction(judgementState judge, Vector3 judgeResultPosition) {
+	public void CreateReaction(judgementState judge, Vector3 judgeResultPosition) {
 		// 五段階評価の表示
 		GameObject judgeResult = GameObject.Instantiate (jugmentResultImage) as GameObject;
 		judgeResult.transform.SetParent (this.transform);
