@@ -51,4 +51,36 @@ public class CreateMyAssets : MonoBehaviour {
 		EditorUtility.FocusProjectWindow();
 		Selection.activeObject = obj;
 	}
+
+	[MenuItem("Assets/Create/CreateTensionStatus")]
+	public static void CreateTensionStatus()
+	{
+		// オブジェクト生成
+		TensionStatusObject obj = ScriptableObject.CreateInstance<TensionStatusObject>();
+
+		// オブジェクトを保存するパス
+		string path = AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/Data/" + typeof(TensionStatusObject) + ".asset");
+
+		AssetDatabase.CreateAsset(obj, path);
+		AssetDatabase.SaveAssets();
+
+		EditorUtility.FocusProjectWindow();
+		Selection.activeObject = obj;
+	}
+
+	[MenuItem("Assets/Create/CreateTensionTable")]
+	public static void CreateTensionTable()
+	{
+		// オブジェクト生成
+		TensionTableObject obj = ScriptableObject.CreateInstance<TensionTableObject>();
+
+		// オブジェクトを保存するパス
+		string path = AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/Data/" + typeof(TensionTableObject) + ".asset");
+
+		AssetDatabase.CreateAsset(obj, path);
+		AssetDatabase.SaveAssets();
+
+		EditorUtility.FocusProjectWindow();
+		Selection.activeObject = obj;
+	}
 }
