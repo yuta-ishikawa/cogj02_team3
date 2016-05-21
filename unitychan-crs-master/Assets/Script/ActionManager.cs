@@ -26,6 +26,7 @@ public class ActionManager : MonoBehaviour {
 	}
 
 	private Reaction reaction;
+	private TimeGaugeManager timeManager;
 
 	// Use this for initialization
 	void Start () {
@@ -52,6 +53,8 @@ public class ActionManager : MonoBehaviour {
 		RegisterEvent(bottom_right, Icon.BOTTOM_RIGHT);
 
 		reaction = GameObject.FindObjectOfType <Reaction>();
+		timeManager = GameObject.FindObjectOfType <TimeGaugeManager> ();
+		timeManager.StartTimeGauge ();
 	}
 
 
@@ -87,26 +90,38 @@ public class ActionManager : MonoBehaviour {
 //	void 
 	void Event()
 	{
-		if (Compare()) {
-			reaction.CreateReaction(GameManager.JudgementState.PERFECT, Vector3.zero);
+		int result = Compare();
+		if (result == 1) {
+			reaction.CreateReaction (GameManager.JudgementState.PERFECT, Vector3.zero);
 			Debug.Log ("Success");
+			input_order_list.Clear ();
+			timeManager.StartTimeGauge ();
+		} else if (result == -1) {
+			reaction.CreateReaction (GameManager.JudgementState.MISS, Vector3.zero);
+			Debug.Log ("Miss");
+			input_order_list.Clear ();
+			timeManager.StartTimeGauge ();
 		}
-
 	}
 
-	bool Compare(){
-		int count;
+	int Compare(){
 		if (input_order_list.Count < action_order_list.Count) {
-			return false;
+			if (action_order_list [input_order_list.Count - 1] != input_order_list [input_order_list.Count - 1]) {
+				return -1;
+			} else {
+				return 0;
+			}
+		} else if (input_order_list.Count > action_order_list.Count) {
+			return -1;
 		}
 
 		for (int i = input_order_list.Count - 1; i >= 0; i--)
 		{
 			if (action_order_list [i] != input_order_list [i]) {
-				return false;
+				return -1;
 			}
 		}
-		return true;
+		return 1;
 	}
 
 	void DebugInput() {
