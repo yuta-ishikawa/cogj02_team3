@@ -25,22 +25,22 @@ public class Reaction : MonoBehaviour {
 		string voiceName = "";
 		switch (judge){
 		case GameManager.JudgementState.MISS:
-			voiceName = "SE_sample";
+			voiceName = "shinjae";
 			break;
 		case GameManager.JudgementState.BAD:
-			voiceName = "SE_sample";
+			voiceName = "sample";
 			break;
 		case GameManager.JudgementState.POOR:
-			voiceName = "SE_sample";
+			voiceName = "sample";
 			break;
 		case GameManager.JudgementState.GOOD:
-			voiceName = "SE_sample";
+			voiceName = "aishiteru";
 			break;
 		case GameManager.JudgementState.GREAT:
-			voiceName = "SE_sample";
+			voiceName = "aishiteru";
 			break;
 		case GameManager.JudgementState.PERFECT:
-			voiceName = "SE_sample";
+			voiceName = "aishiteru";
 			break;
 		}
 		AudioManager.Instance.PlaySE(voiceName);
