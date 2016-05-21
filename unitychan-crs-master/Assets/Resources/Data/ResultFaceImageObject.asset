@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: ResultFaceImageObject
   m_EditorClassIdentifier: 
   _textures:
-  - {fileID: 2800000, guid: d5cbcb22616b0402db13890f6ca03a75, type: 3}
-  - {fileID: 2800000, guid: b928cea14fa344e4c959718c5697271a, type: 3}
-  - {fileID: 2800000, guid: b8aa78523435b4641a484f343fe962bd, type: 3}
-  - {fileID: 2800000, guid: f80af3c7269b2b14e8e833c21048cfe2, type: 3}
-  - {fileID: 2800000, guid: c9fe7b7d5d0d44fc0bd8e766fe1ee246, type: 3}
+  - {fileID: 2800000, guid: 4edc31f3d89f3bc4ba5e934e99ceb4a9, type: 3}
+  - {fileID: 2800000, guid: 18289986cd712e04a9816b0c637d98f8, type: 3}
+  - {fileID: 2800000, guid: 8d43c8ff631b21844bc3498418be9acb, type: 3}
+  - {fileID: 2800000, guid: 47025b309fb6dff44bcce84e6e8ec6a7, type: 3}
+  - {fileID: 2800000, guid: 2d82a00aadf8e0948afb4ea263176b51, type: 3}
