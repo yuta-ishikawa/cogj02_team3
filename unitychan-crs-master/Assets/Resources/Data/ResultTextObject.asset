@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: ResultTextObject
   m_EditorClassIdentifier: 
   _texts:
-  - 22
-  - 11
-  - 33
-  - 44
-  - 444
+  - "\u306F\u3041?"
+  - "\u306F\u3041??"
+  - "\u306F\u3041???"
+  - "\u306F\u3041????"
+  - "\u306F\u3041?????"
