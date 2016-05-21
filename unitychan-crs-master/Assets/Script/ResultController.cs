@@ -5,7 +5,7 @@ using System.Collections;
 public class ResultController : MonoBehaviour {
 
 	[SerializeField]
-	private FadeParam fadeParam;
+	private FadeParam fadeParam = null;
 
 	// タイトルへの遷移
 	public void OnClickTitleButton()
