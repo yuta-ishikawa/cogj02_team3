@@ -26,6 +26,7 @@ public class ActionManager : MonoBehaviour {
 	}
 
 	private Reaction reaction;
+	private TimeGaugeManager timeManager;
 
 	// Use this for initialization
 	void Start () {
@@ -52,6 +53,8 @@ public class ActionManager : MonoBehaviour {
 		RegisterEvent(bottom_right, Icon.BOTTOM_RIGHT);
 
 		reaction = GameObject.FindObjectOfType <Reaction>();
+		timeManager = GameObject.FindObjectOfType <TimeGaugeManager> ();
+		timeManager.StartTimeGauge ();
 	}
 
 
@@ -92,10 +95,12 @@ public class ActionManager : MonoBehaviour {
 			reaction.CreateReaction (GameManager.JudgementState.PERFECT, Vector3.zero);
 			Debug.Log ("Success");
 			input_order_list.Clear ();
+			timeManager.StartTimeGauge ();
 		} else if (result == -1) {
 			reaction.CreateReaction (GameManager.JudgementState.MISS, Vector3.zero);
 			Debug.Log ("Miss");
 			input_order_list.Clear ();
+			timeManager.StartTimeGauge ();
 		}
 	}
 
