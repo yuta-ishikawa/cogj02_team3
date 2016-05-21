@@ -51,4 +51,23 @@ public class CreateMyAssets : MonoBehaviour {
 		EditorUtility.FocusProjectWindow();
 		Selection.activeObject = obj;
 	}
+
+	public static void CreateAssets<T>() where T : ScriptableObject{
+		// オブジェクト生成
+		T obj = ScriptableObject.CreateInstance<T>();
+
+		// オブジェクトを保存するパス
+		string path = AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/Data/" + typeof(T) + ".asset");
+
+		AssetDatabase.CreateAsset(obj, path);
+		AssetDatabase.SaveAssets();
+
+		EditorUtility.FocusProjectWindow();
+		Selection.activeObject = obj;
+	}
+
+	[MenuItem("Assets/Create/CreateMotionOrder")]
+	public static void CreateMotionOrder() {
+		CreateAssets<MotionOrderObject> ();
+	}
 }

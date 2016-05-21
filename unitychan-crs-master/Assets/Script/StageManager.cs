@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class StageManager : MonoBehaviour {
 
+	[SerializeField]
+	private MotionOrderObject[] motionOrders;
+
 	private ActionDemoManager actionDemoManager;
 	private ActionManager actionManager;
 	private Reaction reaction;
@@ -16,16 +19,18 @@ public class StageManager : MonoBehaviour {
 		actionManager = GameObject.FindObjectOfType<ActionManager> ();
 		reaction = GameObject.FindObjectOfType <Reaction>();
 		timeManager = GameObject.FindObjectOfType <TimeGaugeManager> ();
-		List<int> currentOrder = new List<int> ();
-
-		//DEBUG
-		StartNextDemo();
+		currentOrder = new List<int> ();
 	}
 
+	private bool startDemo = true;
 	// Update is called once per frame
 	void Update () {
 		// 出現条件に応じて、お手本開始
-//		StartNextDemo();
+		//DEBUG
+		if (startDemo) {
+			StartNextDemo ();
+			startDemo = false;
+		}
 	}
 
 	void StartNextDemo() {
