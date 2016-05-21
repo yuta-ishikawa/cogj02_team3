@@ -16,6 +16,7 @@ public class ActionManager : MonoBehaviour {
 
 
 	public enum Icon{
+		POINTER_UP = -1,
 		TOP_LEFT,
 		TOP_CENTER,
 		TOP_RIGHT,
@@ -48,20 +49,31 @@ public class ActionManager : MonoBehaviour {
 
 	}
 
+	void StartInput()
+	{
+		input_order_list.Clear();
+	}
 
 	void RegisterEvent(GameObject icon, Icon icon_enum) {
 		EventTrigger.Entry entry = new EventTrigger.Entry();
 		entry.eventID = EventTriggerType.PointerEnter;
 		entry.callback.AddListener( (x) => { input_order_list.Add((int)icon_enum); DebugInput(); } );
 
-		EventTrigger.Entry click = new EventTrigger.Entry();
-		click.eventID = EventTriggerType.PointerClick;
-		click.callback.AddListener( (y) => { input_order_list.Add((int)icon_enum); DebugInput(); } );
+		EventTrigger.Entry pointer_down = new EventTrigger.Entry();
+		pointer_down.eventID = EventTriggerType. ;
+		pointer_down.callback.AddListener( (x) => { input_order_list.Add((int)icon_enum); DebugInput(); } );
+
+		EventTrigger.Entry pointer_up = new EventTrigger.Entry();
+		pointer_up.eventID = EventTriggerType.PointerUp;
+		pointer_up.callback.AddListener( (x) => { input_order_list.Add((int)Icon.POINTER_UP); DebugInput(); } );
 
 		EventTrigger trigger = icon.GetComponent<EventTrigger>();
 		trigger.triggers.Add(entry);
-		trigger.triggers.Add(click);
+		trigger.triggers.Add(pointer_down);
+		trigger.triggers.Add(pointer_up);
 	}
+
+//	void 
 
 
 	void DebugInput() {
