@@ -25,15 +25,18 @@ public class ActionManager : MonoBehaviour {
 		BOTTOM_RIGHT,
 	}
 
+	private StageManager stageManager;
+
 	// Use this for initialization
 	void Start () {
+		stageManager = GameObject.FindObjectOfType<StageManager> ();
+
 		action_order_list.Add (0);
 		action_order_list.Add (1);
 		action_order_list.Add (2);
 		action_order_list.Add (5);
 		action_order_list.Add (4);
 		action_order_list.Add (3);
-
 
 		top_left = GameObject.Find("top_left");
 		top_center = GameObject.Find("top_center");
@@ -88,15 +91,13 @@ public class ActionManager : MonoBehaviour {
 
 		int result = Compare();
 		if (result == 1) {
-			reaction.CreateReaction (GameManager.JudgementState.PERFECT, Vector3.zero);
 			Debug.Log ("Success");
 			input_order_list.Clear ();
-			timeManager.StartTimeGauge ();
+			stageManager.SuccessAction ();
 		} else if (result == -1) {
-			reaction.CreateReaction (GameManager.JudgementState.MISS, Vector3.zero);
 			Debug.Log ("Miss");
 			input_order_list.Clear ();
-			timeManager.StartTimeGauge ();
+			stageManager.FailAction ();
 		}
 	}
 
@@ -129,6 +130,13 @@ public class ActionManager : MonoBehaviour {
 		Debug.Log(str);
 	}
 
-	public void Next() {
+	public void Next(List<int> order) {
+		// 操作開始
+		// 終了はStageManager.FailAction または StageManager.SuccessAction
+		// もしくは時間切れが通知されるので停止
+	}
+
+	public void TimeUp() {
+		// 失敗処理はStageManager側でします
 	}
 }

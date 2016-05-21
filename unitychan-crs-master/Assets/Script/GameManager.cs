@@ -23,14 +23,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 			scoreList.Add (0);
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public void AddScore(JudgementState judge) {
 		scoreList [(int)judge]++;
+	}
+
+	public int GetScore() {
+		return 0;		//TODO
+	}
+
+	public List<int> GetScoreList() {
+		return scoreList;
 	}
 
 	public void ChangeScene(string sceneName){
