@@ -64,15 +64,15 @@ public class ActionManager : MonoBehaviour {
 	void RegisterEvent(GameObject icon, Icon icon_enum) {
 		EventTrigger.Entry entry = new EventTrigger.Entry();
 		entry.eventID = EventTriggerType.PointerEnter;
-		entry.callback.AddListener( (x) => { input_order_list.Add((int)icon_enum); DebugInput(); Event();} );
+		entry.callback.AddListener( (x) => { Event(icon_enum);} );
 
 		EventTrigger.Entry pointer_down = new EventTrigger.Entry();
 		pointer_down.eventID = EventTriggerType.PointerDown;
-		pointer_down.callback.AddListener( (x) => { input_order_list.Add((int)icon_enum); DebugInput(); Event();} );
+		pointer_down.callback.AddListener( (x) => { Event(icon_enum);} );
 
 		EventTrigger.Entry pointer_up = new EventTrigger.Entry();
 		pointer_up.eventID = EventTriggerType.PointerUp;
-		pointer_up.callback.AddListener( (x) => { input_order_list.Add((int)Icon.POINTER_UP); DebugInput(); Event();} );
+		pointer_up.callback.AddListener( (x) => { Event(Icon.POINTER_UP);} );
 
 		EventTrigger trigger = icon.GetComponent<EventTrigger>();
 		trigger.triggers.Add(entry);
@@ -81,8 +81,11 @@ public class ActionManager : MonoBehaviour {
 	}
 
 //	void 
-	void Event()
+	void Event(Icon icon_enum)
 	{
+		input_order_list.Add((int)icon_enum);
+		DebugInput();
+
 		int result = Compare();
 		if (result == 1) {
 			reaction.CreateReaction (GameManager.JudgementState.PERFECT, Vector3.zero);
