@@ -25,9 +25,6 @@ public class ActionManager : MonoBehaviour {
 		BOTTOM_RIGHT,
 	}
 
-	private Reaction reaction;
-	private TimeGaugeManager timeManager;
-
 	// Use this for initialization
 	void Start () {
 		action_order_list.Add (0);
@@ -51,10 +48,6 @@ public class ActionManager : MonoBehaviour {
 		RegisterEvent(bottom_left, Icon.BOTTOM_LEFT);
 		RegisterEvent(bottom_center, Icon.BOTTOM_CENTER);
 		RegisterEvent(bottom_right, Icon.BOTTOM_RIGHT);
-
-		reaction = GameObject.FindObjectOfType <Reaction>();
-		timeManager = GameObject.FindObjectOfType <TimeGaugeManager> ();
-		timeManager.StartTimeGauge ();
 	}
 
 
@@ -131,5 +124,8 @@ public class ActionManager : MonoBehaviour {
 			str = str + input_order_list[i] + ", ";
 		}
 		Debug.Log(str);
+	}
+
+	public void Next() {
 	}
 }
