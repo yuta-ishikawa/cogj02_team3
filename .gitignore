@@ -18,9 +18,24 @@ ExportedObj/
 *.booproj
 *.svd
 
-
 # Unity3D generated meta files
 *.pidb.meta
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Builds
+*.apk
+*.unitypackage
