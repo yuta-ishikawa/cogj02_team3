@@ -7,28 +7,35 @@ using System.Collections.Generic;
 public class MotionOrderObject : ScriptableObject {
 	[SerializeField, Tooltip("モーション名指定")]
 	private string _name;
-	private string name {
+	public string name {
 		get { return _name; }
 	}
 	[SerializeField, Tooltip("モーション開始時刻")]
-	private string _startTimePoint;
-	private string startTimePoint {
+	private float _startTimePoint;
+	public float startTimePoint {
 		get { return _startTimePoint; }
 	}
 	[SerializeField, Tooltip("お手本再生時間")]
-	private string _demoTime;
-	private string demoTime {
+	private float _demoTime;
+	public float demoTime {
 		get { return _demoTime; }
 	}
 	[SerializeField, Tooltip("入力制限時間")]
-	private string _actionTimeLimit;
-	private string actionTimeLimit {
+	private float _actionTimeLimit;
+	public float  actionTimeLimit {
 		get { return _actionTimeLimit; }
 	}
 	[SerializeField, Tooltip("順序指定")]
 	private List<ActionManager.Icon> _order;
-	private List<ActionManager.Icon> order {
+	public List<ActionManager.Icon> order {
 		get { return _order; }
 	}
+
+	private bool _hasUsed = false;
+	public bool hasUsed { 
+		get { return _hasUsed; }
+		set { _hasUsed = value; }
+	}
+	public GameManager.JudgementState judge { get; set; }
 }
 

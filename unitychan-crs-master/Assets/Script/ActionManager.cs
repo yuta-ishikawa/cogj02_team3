@@ -11,8 +11,8 @@ public class ActionManager : MonoBehaviour {
 	private GameObject bottom_left;
 	private GameObject bottom_center;
 	private GameObject bottom_right;
-	private List<int> action_order_list;
-	private List<int> input_order_list;
+	private List<Icon> action_order_list;
+	private List<Icon> input_order_list;
 
 	public enum Icon{
 		POINTER_UP = -1,
@@ -46,7 +46,7 @@ public class ActionManager : MonoBehaviour {
 		RegisterEvent(bottom_right, Icon.BOTTOM_RIGHT);
 
 		actionCheck = false;
-		input_order_list = new List<int> ();
+		input_order_list = new List<Icon> ();
 	}
 
 
@@ -82,7 +82,7 @@ public class ActionManager : MonoBehaviour {
 	void Event(Icon icon_enum)
 	{
 		if (actionCheck) {
-			input_order_list.Add ((int)icon_enum);
+			input_order_list.Add (icon_enum);
 			DebugInput ();
 
 			int result = Compare ();
@@ -129,7 +129,7 @@ public class ActionManager : MonoBehaviour {
 		Debug.Log(str);
 	}
 
-	public void Next(List<int> order) {
+	public void Next(List<Icon> order) {
 		action_order_list = order;
 		actionCheck = true;
 		ResetInput ();

@@ -1071,6 +1071,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eab92cca77c64d7b928079efc8f9bca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  motionOrders:
+  - {fileID: 11400000, guid: afa65444ecbc24f5cbdcf14de8631bc4, type: 2}
 --- !u!4 &1824127698
 Transform:
   m_ObjectHideFlags: 0

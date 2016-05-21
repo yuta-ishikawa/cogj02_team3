@@ -16,7 +16,7 @@ public class ActionDemoManager : MonoBehaviour {
 	
 	}
 
-	public void Next(List<int> order, string motionName, float time) {
+	public void Next(List<ActionManager.Icon> order, string motionName, float time) {
 		//簡易実装：orderに基づいたあにめーしょん
 		//本番実装：名前に基づき事前に作っておいたアニメーションを再生
 		//time秒が経過しデモが終了したらstageManager.FinishDemo();

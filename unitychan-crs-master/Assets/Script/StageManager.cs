@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class StageManager : MonoBehaviour {
 
@@ -12,21 +13,22 @@ public class StageManager : MonoBehaviour {
 	private Reaction reaction;
 	private TimeGaugeManager timeManager;
 
-	private List<int> currentOrder;
+	private MotionOrderObject currentMotionOrder;
 	private AudioSource music;
+	private bool actionCheck;
 
 	void Start () {
 		actionDemoManager = GameObject.FindObjectOfType<ActionDemoManager> ();
 		actionManager = GameObject.FindObjectOfType<ActionManager> ();
 		reaction = GameObject.FindObjectOfType <Reaction>();
 		timeManager = GameObject.FindObjectOfType <TimeGaugeManager> ();
-		currentOrder = new List<int> ();
 
 		GameObject musicPlayer = GameObject.FindObjectOfType<StageDirector> ().GetMusicPlayer (); 
 		music = musicPlayer.transform.FindChild ("Main").GetComponent<AudioSource>();
+		actionCheck = false;
 	}
 
-	private bool startDemo = true;
+	private bool startDemo = false;
 	// Update is called once per frame
 	void Update () {
 		// 出現条件に応じて、お手本開始
@@ -36,20 +38,22 @@ public class StageManager : MonoBehaviour {
 			startDemo = false;
 		}
 
-		Debug.Log (music.time);
+		Debug.Log ("music: " + music.time);
+
+		float musicTime = music.time;
+		foreach (var motionOrder in motionOrders) {
+			if (motionOrder.hasUsed) {
+				if (motionOrder.startTimePoint >= musicTime) {
+					Debug.Log ("<color=green>" + motionOrder.name + "</color>");
+					motionOrder.hasUsed = true;
+					currentMotionOrder = motionOrder;
+				}
+			}
+		}
 	}
 
 	void StartNextDemo() {
-		// 名前に合わせてorderの作成、時間のセットとかとか
-		currentOrder.Add (0);
-		currentOrder.Add (1);
-		currentOrder.Add (2);
-		currentOrder.Add (5);
-		currentOrder.Add (4);
-		currentOrder.Add (3);
-
-		float demoTime = 0.0f;
-		actionDemoManager.Next (currentOrder, "MotionName", demoTime);
+		actionDemoManager.Next (currentMotionOrder.order, currentMotionOrder.name, currentMotionOrder.demoTime);
 	}
 
 	public void FinishDemo() {
@@ -58,20 +62,31 @@ public class StageManager : MonoBehaviour {
 	}
 
 	void StartNextAction() {
-		float actionTime = 0.0f;
-
-		timeManager.StartTimeGauge ();
-		actionManager.Next (currentOrder);
+		timeManager.StartTimeGauge (currentMotionOrder.actionTimeLimit);
+		actionManager.Next (currentMotionOrder.order);
+		actionCheck = true;
 	}
 
 	public void FailAction() {
-		reaction.CreateReaction (GameManager.JudgementState.MISS, Vector3.zero);
-		timeManager.StartTimeGauge ();
+		FinishAction(GameManager.JudgementState.MISS);
 	}
 
 	public void SuccessAction() {
 		// TODO 残り時間に応じた評価
-		reaction.CreateReaction (GameManager.JudgementState.PERFECT, Vector3.zero);
-		timeManager.StartTimeGauge ();
+		FinishAction(GameManager.JudgementState.PERFECT);
+	}
+
+	void FinishAction(GameManager.JudgementState judge) {
+		currentMotionOrder.judge = judge;
+		reaction.CreateReaction (judge, Vector3.zero);
+		timeManager.StopTimeGauge ();
+		actionCheck = true;
+	}
+
+	public void TimeUp() {
+		if (actionCheck) {
+			actionManager.TimeUp ();
+			FailAction ();
+		}
 	}
 }
