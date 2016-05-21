@@ -11,4 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9eff4b4dd573314286b79433598ff8a, type: 3}
   m_Name: ResultVoiceObject
   m_EditorClassIdentifier: 
-  _clips: []
+  _clips:
+  - {fileID: 8300000, guid: e036c3688f515954dbe9ab7ff80f71eb, type: 3}
+  - {fileID: 8300000, guid: e036c3688f515954dbe9ab7ff80f71eb, type: 3}
+  - {fileID: 8300000, guid: e036c3688f515954dbe9ab7ff80f71eb, type: 3}
+  - {fileID: 8300000, guid: e036c3688f515954dbe9ab7ff80f71eb, type: 3}
+  - {fileID: 8300000, guid: e036c3688f515954dbe9ab7ff80f71eb, type: 3}
