@@ -13,6 +13,7 @@ public class StageManager : MonoBehaviour {
 	private TimeGaugeManager timeManager;
 
 	private List<int> currentOrder;
+	private AudioSource music;
 
 	void Start () {
 		actionDemoManager = GameObject.FindObjectOfType<ActionDemoManager> ();
@@ -20,6 +21,9 @@ public class StageManager : MonoBehaviour {
 		reaction = GameObject.FindObjectOfType <Reaction>();
 		timeManager = GameObject.FindObjectOfType <TimeGaugeManager> ();
 		currentOrder = new List<int> ();
+
+		GameObject musicPlayer = GameObject.FindObjectOfType<StageDirector> ().GetMusicPlayer (); 
+		music = musicPlayer.transform.FindChild ("Main").GetComponent<AudioSource>();
 	}
 
 	private bool startDemo = true;
@@ -31,6 +35,8 @@ public class StageManager : MonoBehaviour {
 			StartNextDemo ();
 			startDemo = false;
 		}
+
+		Debug.Log (music.time);
 	}
 
 	void StartNextDemo() {
