@@ -5,15 +5,18 @@ using UnityEngine.UI;
 public class TimeGaugeManager : MonoBehaviour {
 
 	private Image timeGauge;
-	private const float timeLimit = 8;
+	private float timeLimit;
 	private float remainTime;
 	private bool isGaugeMoving;
+	private StageManager stageManager;
 
 	// Use this for initialization
 	void Start () {
 		timeGauge = this.GetComponent<Image> ();
+		timeGauge.fillAmount = 0.0f;
 		remainTime = 0.0f;
 		isGaugeMoving = false;
+		stageManager = GameObject.FindObjectOfType<StageManager> ();
 	}
 	
 	// Update is called once per frame
@@ -22,14 +25,16 @@ public class TimeGaugeManager : MonoBehaviour {
 			remainTime -= Time.deltaTime;
 			if (remainTime <= 0) {
 				StopTimeGauge ();
+				stageManager.TimeUp ();
 			} else {
 				timeGauge.fillAmount = remainTime / timeLimit;
 			}
 		}	
 	}
 
-	public void StartTimeGauge() {
+	public void StartTimeGauge(float timeLimit) {
 		timeGauge.fillAmount = 1.0f;
+		this.timeLimit = timeLimit;
 		remainTime = timeLimit;
 		isGaugeMoving = true;
 	}
@@ -38,9 +43,4 @@ public class TimeGaugeManager : MonoBehaviour {
 		timeGauge.fillAmount = 0.0f;
 		isGaugeMoving = false;
 	}
-
-	public bool hasFinished() {
-		return (!isGaugeMoving);
-	}
-
 }
