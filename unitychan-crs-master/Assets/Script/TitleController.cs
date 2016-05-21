@@ -4,11 +4,13 @@ using System.Collections;
 // TitleSceneに関わる処理を管理するコンポ―ネント
 public class TitleController : MonoBehaviour {
 
+	[SerializeField]
+	private FadeParam fadeParam;
 
 	// スタートボタンをクリック
 	public void OnClickStartButton()
 	{
-		ScreenFadeManager.Instance.FadeIn(2.0f, new Color(0.0f, 0.0f, 0.0f),
+		ScreenFadeManager.Instance.FadeIn(fadeParam.time, fadeParam.color,
 			delegate { Debug.Log("Fade Out OK"); });
 	}
 
