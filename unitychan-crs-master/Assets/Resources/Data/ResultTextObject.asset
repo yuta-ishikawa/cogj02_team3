@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: ResultTextObject
   m_EditorClassIdentifier: 
   _texts:
-  - "\u306F\u3041?"
+  - "\u30D5\u30A1\u30F3\u3001\u8F9E\u3081\u3066\u3044\u3044\u3088"
   - "\u306F\u3041??"
   - "\u306F\u3041???"
   - "\u306F\u3041????"

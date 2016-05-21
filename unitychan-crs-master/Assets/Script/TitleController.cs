@@ -17,7 +17,7 @@ public class TitleController : MonoBehaviour {
 	// スタートボタンをクリック
 	public void OnClickStartButton()
 	{
-		// フェードイン中は反応しないように
+		// フェードアウト中は反応しないように
 		if (ScreenFadeManager.Instance.isFadeAction) return;
 
 		ScreenFadeManager.Instance.FadeIn(fadeParam.time, fadeParam.color,

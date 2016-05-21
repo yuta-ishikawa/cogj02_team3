@@ -40,7 +40,6 @@ public class ResultVoice : MonoBehaviour {
 	void Start () {
 		audioSource = GetComponent<AudioSource>();
 		SetVoice();
-		PlayVoice();
 	}
 
 	// 一応任意のタイミングでボイス再生

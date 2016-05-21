@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voiceObj: {fileID: 11400000, guid: a7d27abffbd64a040a843a23755249b2, type: 2}
-  rank: 4
+  rank: 0
 --- !u!1 &196588454
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faceRawImage: {fileID: 1750704000}
   images: {fileID: 11400000, guid: 8c10418f4db99c34baddb10101c40d56, type: 2}
-  rank: 2
+  rank: 0
 --- !u!114 &478645576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,7 +737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textObj: {fileID: 11400000, guid: 23d0bffb47aef0540a0fd34d83a9f803, type: 2}
   resultText: {fileID: 1739645125}
-  rank: 3
+  rank: 0
 --- !u!1 &982661576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,8 +1024,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeParam:
-    _time: 2
+    _time: 1
     _color: {r: 0, g: 0, b: 0, a: 1}
+  resultVoice: {fileID: 165479407}
 --- !u!1 &1476051576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,10 +1122,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 4
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
