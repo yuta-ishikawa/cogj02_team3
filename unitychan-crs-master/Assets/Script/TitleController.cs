@@ -21,7 +21,10 @@ public class TitleController : MonoBehaviour {
 		if (ScreenFadeManager.Instance.isFadeAction) return;
 
 		ScreenFadeManager.Instance.FadeIn(fadeParam.time, fadeParam.color,
-			delegate { Debug.Log("Fade In OK"); });
+			delegate {
+				Debug.Log("Fade In OK");
+				SceneManager.LoadScene("Main");
+			});
 	}
 
 }
