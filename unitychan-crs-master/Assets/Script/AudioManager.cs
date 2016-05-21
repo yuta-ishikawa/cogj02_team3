@@ -28,7 +28,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager> {
 		//create listener
 		if(FindObjectsOfType(typeof(AudioListener)).All(o => !((AudioListener)o).enabled))
 		{
-			this.gameObject.AddComponent<AudioListener>();
+//			this.gameObject.AddComponent<AudioListener>();	//DEBUG
 		}
 		//create audio sources
 		this.bgmSource = this.gameObject.AddComponent<AudioSource>();

@@ -25,15 +25,16 @@ public class ActionManager : MonoBehaviour {
 		BOTTOM_RIGHT,
 	}
 
+	private Reaction reaction;
 
 	// Use this for initialization
 	void Start () {
 		action_order_list.Add (0);
 		action_order_list.Add (1);
 		action_order_list.Add (2);
-		action_order_list.Add (3);
-		action_order_list.Add (4);
 		action_order_list.Add (5);
+		action_order_list.Add (4);
+		action_order_list.Add (3);
 
 
 		top_left = GameObject.Find("top_left");
@@ -49,6 +50,8 @@ public class ActionManager : MonoBehaviour {
 		RegisterEvent(bottom_left, Icon.BOTTOM_LEFT);
 		RegisterEvent(bottom_center, Icon.BOTTOM_CENTER);
 		RegisterEvent(bottom_right, Icon.BOTTOM_RIGHT);
+
+		reaction = GameObject.FindObjectOfType <Reaction>();
 	}
 
 
@@ -85,6 +88,7 @@ public class ActionManager : MonoBehaviour {
 	void Event()
 	{
 		if (Compare()) {
+			reaction.CreateReaction(GameManager.JudgementState.PERFECT, Vector3.zero);
 			Debug.Log ("Success");
 		}
 

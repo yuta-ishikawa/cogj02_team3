@@ -11,7 +11,7 @@ public class Reaction : MonoBehaviour {
 	private GameObject jugmentResultImage;
 
 	void Start () {
-		CreateReaction (GameManager.JudgementState.PERFECT, Vector3.zero); //DBEUG
+//		CreateReaction (GameManager.JudgementState.PERFECT, Vector3.zero); //DBEUG
 	}
 
 	public void CreateReaction(GameManager.JudgementState judge, Vector3 judgeResultPosition) {
