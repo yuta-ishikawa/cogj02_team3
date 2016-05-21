@@ -6,6 +6,7 @@ using System.Linq;
 public class StageManager : MonoBehaviour {
 
 	[SerializeField]
+	private MotionOrderObjects motionOrderObjects;
 	private MotionOrderObject[] motionOrders;
 
 	private ActionDemoManager actionDemoManager;
@@ -18,6 +19,8 @@ public class StageManager : MonoBehaviour {
 	private bool actionCheck;
 
 	void Start () {
+		motionOrders = motionOrderObjects.motionOrders;
+
 		actionDemoManager = GameObject.FindObjectOfType<ActionDemoManager> ();
 		actionManager = GameObject.FindObjectOfType<ActionManager> ();
 		reaction = GameObject.FindObjectOfType <Reaction>();
@@ -37,16 +40,22 @@ public class StageManager : MonoBehaviour {
 			StartNextDemo ();
 			startDemo = false;
 		}
-
-		Debug.Log ("music: " + music.time);
-
+			
 		float musicTime = music.time;
 		foreach (var motionOrder in motionOrders) {
-			if (motionOrder.hasUsed) {
-				if (motionOrder.startTimePoint >= musicTime) {
-					Debug.Log ("<color=green>" + motionOrder.name + "</color>");
+			if (! motionOrder.hasUsed) {
+				if (motionOrder.startTimePoint <= musicTime) {
+					// DEBUG
+					Debug.Log ("<color=green>" + motionOrder.name + "</color> : " + musicTime);
+					string str = "";
+					for (int i = 0; i< motionOrder.order.Count; i++){
+						str = str + motionOrder.order[i] + ", ";
+					}
+					Debug.Log(str);
+
 					motionOrder.hasUsed = true;
 					currentMotionOrder = motionOrder;
+					StartNextDemo ();
 				}
 			}
 		}

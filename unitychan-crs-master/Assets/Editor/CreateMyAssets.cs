@@ -70,4 +70,10 @@ public class CreateMyAssets : MonoBehaviour {
 	public static void CreateMotionOrder() {
 		CreateAssets<MotionOrderObject> ();
 	}
+
+	[MenuItem("Assets/Create/CreateMotionOrders")]
+	public static void CreateMotionOrders() {
+		CreateAssets<MotionOrderObjects> ();
+	}
+
 }

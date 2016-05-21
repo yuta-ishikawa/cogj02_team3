@@ -13,6 +13,7 @@ public class TimeGaugeManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		timeGauge = this.GetComponent<Image> ();
+		timeGauge.fillAmount = 0.0f;
 		remainTime = 0.0f;
 		isGaugeMoving = false;
 		stageManager = GameObject.FindObjectOfType<StageManager> ();

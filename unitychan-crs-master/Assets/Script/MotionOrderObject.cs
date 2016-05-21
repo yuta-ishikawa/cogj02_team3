@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
-// リザルトで表示するテキストをまとめたオブジェクト
+// ステージで音楽の再生時間に応じて出現させるノーツ（モーション）
 [System.Serializable]
 public class MotionOrderObject : ScriptableObject {
 	[SerializeField, Tooltip("モーション名指定")]
 	private string _name;
-	public string name {
+	public new string name {
 		get { return _name; }
 	}
 	[SerializeField, Tooltip("モーション開始時刻")]
@@ -31,11 +31,11 @@ public class MotionOrderObject : ScriptableObject {
 		get { return _order; }
 	}
 
-	private bool _hasUsed = false;
-	public bool hasUsed { 
-		get { return _hasUsed; }
-		set { _hasUsed = value; }
-	}
+	public bool hasUsed { get; set; }
 	public GameManager.JudgementState judge { get; set; }
+
+	void OnEnable() {
+		hasUsed = false;
+	}
 }
 
