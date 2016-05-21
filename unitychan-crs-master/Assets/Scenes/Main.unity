@@ -891,14 +891,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4827986f259448ea5eaf723942020c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top_left: {fileID: 0}
-  top_center: {fileID: 0}
-  top_right: {fileID: 0}
-  bottom_left: {fileID: 0}
-  bottom_center: {fileID: 0}
-  bottom_right: {fileID: 0}
-  action_order_list: 
-  input_order_list: 
 --- !u!114 &1476275451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1060,6 +1052,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1824127698}
   - 114: {fileID: 1824127697}
+  - 114: {fileID: 1824127699}
   m_Layer: 0
   m_Name: StageManager
   m_TagString: Untagged
@@ -1090,6 +1083,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+--- !u!114 &1824127699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1824127696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff2b641ff4c542aaa88127116b97975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1989446948
 Prefab:
   m_ObjectHideFlags: 0

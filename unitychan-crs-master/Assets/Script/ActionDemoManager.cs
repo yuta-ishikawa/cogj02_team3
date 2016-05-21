@@ -8,7 +8,7 @@ public class ActionDemoManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GameObject.FindObjectOfType<StageManager> ();
+		stageManager = GameObject.FindObjectOfType<StageManager> ();
 	}
 	
 	// Update is called once per frame
