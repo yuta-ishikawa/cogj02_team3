@@ -34,9 +34,13 @@ public class TimeGaugeManager : MonoBehaviour {
 		isGaugeMoving = true;
 	}
 
-	void StopTimeGauge() {
+	public void StopTimeGauge() {
 		timeGauge.fillAmount = 0.0f;
 		isGaugeMoving = false;
 	}
-			
+
+	public bool hasFinished() {
+		return (!isGaugeMoving);
+	}
+
 }
