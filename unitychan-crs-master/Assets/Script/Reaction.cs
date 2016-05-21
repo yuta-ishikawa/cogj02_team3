@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Reaction : MonoBehaviour {
 
-	enum judgementState{
+	public enum judgementState{
 		MISS,
 		BAD,
 		POOR,
