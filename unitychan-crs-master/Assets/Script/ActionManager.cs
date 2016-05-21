@@ -60,7 +60,7 @@ public class ActionManager : MonoBehaviour {
 		entry.callback.AddListener( (x) => { input_order_list.Add((int)icon_enum); DebugInput(); } );
 
 		EventTrigger.Entry pointer_down = new EventTrigger.Entry();
-		pointer_down.eventID = EventTriggerType. ;
+		pointer_down.eventID = EventTriggerType.PointerDown;
 		pointer_down.callback.AddListener( (x) => { input_order_list.Add((int)icon_enum); DebugInput(); } );
 
 		EventTrigger.Entry pointer_up = new EventTrigger.Entry();
