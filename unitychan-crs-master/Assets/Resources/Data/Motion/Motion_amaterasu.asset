@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3c2a34817d49ec871ff822941ceab, type: 3}
   m_Name: Motion_amaterasu
   m_EditorClassIdentifier: 
-  _name: MotionOad
+  _name: MotionAmaterasu
   _demoTime: 6
   _actionTimeLimit: 9
   _order: 0300000002000000ffffffff0500000000000000ffffffff0300000002000000ffffffff0500000000000000ffffffff0400000001000000
