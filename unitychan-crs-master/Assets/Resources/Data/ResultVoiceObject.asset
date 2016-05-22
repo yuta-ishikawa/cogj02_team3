@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: ResultVoiceObject
   m_EditorClassIdentifier: 
   _clips:
-  - {fileID: 8300000, guid: 6ffee51db8294b048bd090f3b002326d, type: 3}
-  - {fileID: 8300000, guid: 6ffee51db8294b048bd090f3b002326d, type: 3}
-  - {fileID: 8300000, guid: 6ffee51db8294b048bd090f3b002326d, type: 3}
-  - {fileID: 8300000, guid: 6ffee51db8294b048bd090f3b002326d, type: 3}
-  - {fileID: 8300000, guid: 6ffee51db8294b048bd090f3b002326d, type: 3}
+  - {fileID: 8300000, guid: 90390353888cc41f68c6d6dab015faae, type: 3}
+  - {fileID: 8300000, guid: a348fbaa08d934f2aaf5455461b680ac, type: 3}
+  - {fileID: 8300000, guid: a942b916507cf4310b1708fd0f1609c5, type: 3}
+  - {fileID: 8300000, guid: e524bba20ef734c70875f2b9597b257d, type: 3}
+  - {fileID: 8300000, guid: fa9fd1c1bf8a6484290e81fa9280b202, type: 3}

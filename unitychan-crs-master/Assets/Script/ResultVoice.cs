@@ -8,6 +8,7 @@ public class ResultVoice : MonoBehaviour {
 	private ResultVoiceObject voiceObj;
 	
 	// 念のためコンポーネント格納用の変数を用意
+	[SerializeField]
 	private AudioSource audioSource;
 
 	ResultScoreRank tmpRank;

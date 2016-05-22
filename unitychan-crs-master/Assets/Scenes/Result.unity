@@ -267,6 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voiceObj: {fileID: 11400000, guid: a7d27abffbd64a040a843a23755249b2, type: 2}
+  audioSource: {fileID: 165479405}
 --- !u!1 &196588454
 GameObject:
   m_ObjectHideFlags: 0
