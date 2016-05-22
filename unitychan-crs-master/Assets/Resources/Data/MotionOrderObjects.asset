@@ -16,7 +16,7 @@ MonoBehaviour:
     motionOrderObject: {fileID: 11400000, guid: a39cf7b3052424841ad359773c70e346,
       type: 2}
   - startTimePoint: 15
-    motionOrderObject: {fileID: 11400000, guid: fd30d90627eab4031b491bf51c6400bb,
+    motionOrderObject: {fileID: 11400000, guid: a39cf7b3052424841ad359773c70e346,
       type: 2}
   - startTimePoint: 25
     motionOrderObject: {fileID: 11400000, guid: 9e8134cd11da84fddb59c04b0b90300b,
