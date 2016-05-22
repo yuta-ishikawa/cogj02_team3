@@ -66,9 +66,9 @@ public class ActionManager : MonoBehaviour {
 		entry.eventID = EventTriggerType.PointerEnter;
 		entry.callback.AddListener( (x) => { Event(icon_enum);} );
 
-		EventTrigger.Entry pointer_down = new EventTrigger.Entry();
-		pointer_down.eventID = EventTriggerType.PointerDown;
-		pointer_down.callback.AddListener( (x) => { Event(icon_enum);} );
+//		EventTrigger.Entry pointer_down = new EventTrigger.Entry();
+//		pointer_down.eventID = EventTriggerType.PointerDown;
+//		pointer_down.callback.AddListener( (x) => { Event(icon_enum);} );
 
 		EventTrigger.Entry pointer_up = new EventTrigger.Entry();
 		pointer_up.eventID = EventTriggerType.PointerUp;
@@ -76,7 +76,7 @@ public class ActionManager : MonoBehaviour {
 
 		EventTrigger trigger = icon.GetComponent<EventTrigger>();
 		trigger.triggers.Add(entry);
-		trigger.triggers.Add(pointer_down);
+//		trigger.triggers.Add(pointer_down);
 		trigger.triggers.Add(pointer_up);
 	}
 
