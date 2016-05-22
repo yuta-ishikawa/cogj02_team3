@@ -72,26 +72,28 @@ public class ActionDemoManager : MonoBehaviour {
 			
 		if (current == (int)ActionManager.Icon.POINTER_UP) {
 			//タップ演出
-			FadeOutHand(time/2, time * action_count);
-			FadeInHand(time/2, time * action_count + time/2);
+			FadeOutHand(time/2, time * action_count + time);
+			FadeInHand(time/2, time * action_count + time + time);
 		} else if (isThroughCenter(current, before)) {
 			iTween.MoveTo (this.hand, iTween.Hash ("path", movepath,
 				                                   "time", time,
-				                                   "delay", time * action_count));
+				                                   "delay", time * action_count,
+				                                   "easeType",iTween.EaseType.linear));
 		} else {
 			iTween.MoveTo (this.hand, iTween.Hash ("position", this.position_list [current],
 				                                   "time", time,
-				                                   "delay", time * action_count));
+				                                   "delay", time * action_count,
+				                                   "easeType",iTween.EaseType.linear));
 		}
 	}
 
 	private void FadeInHand(float time, float delay) {
 		// SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
-		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", time, "delay", delay, "onupdate", "SetValue"));
+		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", 0.1f, "delay", delay, "onupdate", "SetValue"));
 	}
 	private void FadeOutHand(float time, float delay) {
 		// SetValue()を毎フレーム呼び出して、１秒間に１から０までの値の中間値を渡す
-		iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", time, "delay", delay, "onupdate", "SetValue"));
+		iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", 0f, "delay", delay, "onupdate", "SetValue"));
 	}
 	private void SetValue(float alpha) {
 		// iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
@@ -104,7 +106,8 @@ public class ActionDemoManager : MonoBehaviour {
 			                                 "time", time,
 			                                 "delay", time * action_count,
 			                                 "oncomplete", "FinishDemo",
-			                                 "oncompletetarget", gameObject));
+			                                 "oncompletetarget", gameObject,
+			                                 "easeType",iTween.EaseType.linear));
 	}
 
 	private bool isThroughCenter(int current, int before) {
