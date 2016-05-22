@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: TensionStatusObject
   m_EditorClassIdentifier: 
   _tensionSprites:
-  - {fileID: 21300000, guid: f5d673637175e8544a6056857533b3ec, type: 3}
-  - {fileID: 21300000, guid: 80ce688a773164beabdbd642278beaec, type: 3}
-  - {fileID: 21300000, guid: c74c251d10d57408da8f689c6236582c, type: 3}
-  - {fileID: 21300000, guid: bbd508317c92a420e8a930b2f888f801, type: 3}
-  - {fileID: 21300000, guid: fd08e39fc0a7a461d9b54cb11dfe0b32, type: 3}
+  - {fileID: 21300000, guid: eb2c8678b77b9db49819e13614a9916a, type: 3}
+  - {fileID: 21300000, guid: 4a1313b26b4753d49ae9866ae181019a, type: 3}
+  - {fileID: 21300000, guid: 2a4d7e82a1ee7e648bb65e4203285acd, type: 3}
+  - {fileID: 21300000, guid: ef19a3a0bae1c7943a911a7468d57809, type: 3}
+  - {fileID: 21300000, guid: 70391037b11647145be05f2c0704506a, type: 3}

@@ -543,8 +543,8 @@ Canvas:
   m_GameObject: {fileID: 1215317816}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 982661580}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
@@ -785,3 +785,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!1001 &2087222273
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 437832, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437832, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 8.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 437832, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437832, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437832, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437832, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437832, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 437832, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 19838306, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+      propertyPath: ShapeModule.boxX
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 19838306, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+      propertyPath: InitialModule.startLifetime.minCurve.m_Curve.Array.data[0].value
+      value: 0.71428573
+      objectReference: {fileID: 0}
+    - target: {fileID: 19838306, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 19838306, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+      propertyPath: EmissionModule.rate.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 97b2e72de59dfbe49a533aba37c11503, type: 2}
+  m_IsPrefabParent: 0
