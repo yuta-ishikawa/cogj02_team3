@@ -43,4 +43,8 @@ public class TimeGaugeManager : MonoBehaviour {
 		timeGauge.fillAmount = 0.0f;
 		isGaugeMoving = false;
 	}
+
+	public float GetRemainTimeRate() {
+		return remainTime / timeLimit;
+	}
 }
