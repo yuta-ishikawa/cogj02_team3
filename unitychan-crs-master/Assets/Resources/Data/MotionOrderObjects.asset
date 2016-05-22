@@ -16,13 +16,13 @@ MonoBehaviour:
     motionOrderObject: {fileID: 11400000, guid: a39cf7b3052424841ad359773c70e346,
       type: 2}
   - startTimePoint: 15
-    motionOrderObject: {fileID: 11400000, guid: a39cf7b3052424841ad359773c70e346,
-      type: 2}
-  - startTimePoint: 25
     motionOrderObject: {fileID: 11400000, guid: 9e8134cd11da84fddb59c04b0b90300b,
       type: 2}
+  - startTimePoint: 25
+    motionOrderObject: {fileID: 11400000, guid: a39cf7b3052424841ad359773c70e346,
+      type: 2}
   - startTimePoint: 35
-    motionOrderObject: {fileID: 11400000, guid: 668c37248c4be4ceabf9d6a9e76cf882,
+    motionOrderObject: {fileID: 11400000, guid: 9e8134cd11da84fddb59c04b0b90300b,
       type: 2}
   - startTimePoint: 45
     motionOrderObject: {fileID: 11400000, guid: 5994805011be74a25aae5fc072f081cb,
@@ -37,7 +37,7 @@ MonoBehaviour:
     motionOrderObject: {fileID: 11400000, guid: d63831b86541d4f15ae7644976ecc5d8,
       type: 2}
   - startTimePoint: 85
-    motionOrderObject: {fileID: 11400000, guid: 254764db30ff34aa3bfdacfdd5d5d3d9,
+    motionOrderObject: {fileID: 11400000, guid: aa7a799f22e7c439c8ba92cd5b999b9a,
       type: 2}
   - startTimePoint: 95
     motionOrderObject: {fileID: 11400000, guid: 5994805011be74a25aae5fc072f081cb,
