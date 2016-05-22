@@ -63,7 +63,11 @@ public class StageDirector : MonoBehaviour
 
     public void ActivateProps()
     {
-        foreach (var o in objectsNeedsActivation) o.BroadcastMessage("ActivateProps");
+		foreach (var o in objectsNeedsActivation)
+		{
+			Debug.Log("SetActive" + o.gameObject.name);
+			o.BroadcastMessage("ActivateProps", SendMessageOptions.DontRequireReceiver);
+		}
     }
 
     public void SwitchCamera(int index)

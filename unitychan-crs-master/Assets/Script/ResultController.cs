@@ -43,6 +43,8 @@ public class ResultController : MonoBehaviour {
 			delegate {
 				Debug.Log("Fade In OK");
 				SceneManager.LoadScene("Main");
+				// メインに遷移後すぐにFadeInを完了させる
+				ScreenFadeManager.Instance.FadeIn(0.01f, new Color(1.0f, 1.0f, 1.0f), delegate { Debug.Log("OK"); });
 			});
 	}
 }

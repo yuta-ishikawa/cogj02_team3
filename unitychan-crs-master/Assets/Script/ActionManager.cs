@@ -22,6 +22,7 @@ public class ActionManager : MonoBehaviour {
 		BOTTOM_LEFT,
 		BOTTOM_CENTER,
 		BOTTOM_RIGHT,
+		MIDDLE_CENTER,
 	}
 
 	private StageManager stageManager;
