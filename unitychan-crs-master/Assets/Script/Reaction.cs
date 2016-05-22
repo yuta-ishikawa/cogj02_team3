@@ -28,6 +28,7 @@ public class Reaction : MonoBehaviour {
 		judgeResult.transform.SetParent (this.transform);
 		judgeResult.GetComponent<Image> ().sprite = judgeResultSprites [(int)judge];
 		judgeResult.GetComponent<RectTransform>().localPosition = judgeResultPosition;
+		judgeResult.GetComponent<RectTransform>().localScale = Vector3.one;
 
 		// ボイスの再生
 		AudioClip voice = voiceList [(int)judge] [UnityEngine.Random.Range (0, voiceList [(int)judge].Count)];

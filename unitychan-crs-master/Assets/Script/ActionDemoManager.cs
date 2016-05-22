@@ -65,17 +65,6 @@ public class ActionDemoManager : MonoBehaviour {
 			movepath [0] = this.position_list[(int)ActionManager.Icon.MIDDLE_CENTER];
 			movepath [1] = this.position_list[current];
 		}
-		// Vector3[] movepath = new Vector3[4];
-		// if(current != (int)ActionManager.Icon.POINTER_UP) {
-		// 	movepath [0] = new Vector3(this.position_list[current].x - this.position_list[current].x,
-		// 	                           this.position_list[current].y - this.position_list[current].y,
-		// 	                           this.position_list[current].z) - this.position_list[current].z;
-		// 	movepath [1] = this.position_list[(int)ActionManager.Icon.MIDDLE_CENTER];
-		// 	movepath [2] = new Vector3(this.position_list[current].x - this.position_list[current].x,
-		// 	                           this.position_list[current].y - this.position_list[current].y,
-		// 	                           this.position_list[current].z - this.position_list[current].z);
-		// 	movepath [3] = this.position_list[current];
-		// }
 			
 		if (current == (int)ActionManager.Icon.POINTER_UP) {
 			//タップ演出
