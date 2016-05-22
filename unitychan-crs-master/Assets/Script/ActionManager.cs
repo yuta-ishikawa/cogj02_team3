@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 
 public class ActionManager : MonoBehaviour {
@@ -13,6 +14,7 @@ public class ActionManager : MonoBehaviour {
 	private GameObject bottom_right;
 	private List<Icon> action_order_list;
 	private List<Icon> input_order_list;
+	private GameObject tap_object;
 
 	public enum Icon{
 		POINTER_UP = -1,
@@ -69,15 +71,15 @@ public class ActionManager : MonoBehaviour {
 	void RegisterEvent(GameObject icon, Icon icon_enum) {
 		EventTrigger.Entry entry = new EventTrigger.Entry();
 		entry.eventID = EventTriggerType.PointerEnter;
-		entry.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.PointerEnter);} );
+		entry.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.PointerEnter, icon);} );
 
 		EventTrigger.Entry pointer_down = new EventTrigger.Entry();
 		pointer_down.eventID = EventTriggerType.PointerDown;
-		pointer_down.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.PointerDown);} );
+		pointer_down.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.PointerDown, icon);} );
 
 		EventTrigger.Entry pointer_up = new EventTrigger.Entry();
 		pointer_up.eventID = EventTriggerType.PointerUp;
-		pointer_up.callback.AddListener( (x) => { Event(Icon.POINTER_UP, EventTriggerType.PointerUp);} );
+		pointer_up.callback.AddListener( (x) => { Event(Icon.POINTER_UP, EventTriggerType.PointerUp, icon);} );
 
 		EventTrigger trigger = icon.GetComponent<EventTrigger>();
 		trigger.triggers.Add(entry);
@@ -85,7 +87,7 @@ public class ActionManager : MonoBehaviour {
 		trigger.triggers.Add(pointer_up);
 	}
 
-	void Event(Icon icon_enum, EventTriggerType eventType)
+	void Event(Icon icon_enum, EventTriggerType eventType, GameObject icon)
 	{
 		switch (eventType) {
 		case EventTriggerType.PointerEnter:
@@ -106,6 +108,8 @@ public class ActionManager : MonoBehaviour {
 
 		if (actionCheck) {
 			input_order_list.Add (icon_enum);
+			tap_object = icon;
+			FadeInHand();
 			DebugInput ();
 
 			int result = Compare ();
@@ -121,6 +125,19 @@ public class ActionManager : MonoBehaviour {
 				ResetInput ();
 			}
 		}
+	}
+
+	private void FadeInHand() {
+		// SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
+		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", 1.0f, "delay", 0, "loopType", "none", "onupdate", "SetValue"));
+	}
+	private void FadeOutHand() {
+		// SetValue()を毎フレーム呼び出して、１秒間に１から０までの値の中間値を渡す
+		iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", 1.0f, "delay", 0, "loopType", "none", "onupdate", "SetValue"));
+	}
+	private void SetValue(float alpha) {
+		// iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
+		this.tap_object.GetComponent<RawImage>().color = new Vector4(255, 255, 255, alpha);
 	}
 
 	int Compare(){
