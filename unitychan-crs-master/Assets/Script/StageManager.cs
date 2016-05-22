@@ -38,7 +38,7 @@ public class StageManager : MonoBehaviour {
 	void Update () {			
 		float musicTime = music.time;
 
-		if (musicTime > 105) {
+		if (musicTime > 103) {
 			ScreenFadeManager.Instance.FadeIn(fadeParam.time, fadeParam.color,
 				delegate {
 					Debug.Log("Fade In OK");
