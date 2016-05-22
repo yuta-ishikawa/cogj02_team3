@@ -12,9 +12,18 @@ MonoBehaviour:
   m_Name: MotionOrderObjects
   m_EditorClassIdentifier: 
   _motionOrders:
-  - startTimePoint: 5
+  - startTimePoint: 10
+    motionOrderObject: {fileID: 11400000, guid: 9e318958cfbed4753be6b74971ea5fc7,
+      type: 2}
+  - startTimePoint: 20
+    motionOrderObject: {fileID: 11400000, guid: 9e318958cfbed4753be6b74971ea5fc7,
+      type: 2}
+  - startTimePoint: 30
+    motionOrderObject: {fileID: 11400000, guid: 9e318958cfbed4753be6b74971ea5fc7,
+      type: 2}
+  - startTimePoint: 40
     motionOrderObject: {fileID: 11400000, guid: afa65444ecbc24f5cbdcf14de8631bc4,
       type: 2}
-  - startTimePoint: 15
+  - startTimePoint: 50
     motionOrderObject: {fileID: 11400000, guid: afa65444ecbc24f5cbdcf14de8631bc4,
       type: 2}

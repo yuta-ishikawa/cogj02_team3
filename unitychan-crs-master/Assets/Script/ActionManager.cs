@@ -27,6 +27,7 @@ public class ActionManager : MonoBehaviour {
 
 	private StageManager stageManager;
 	private bool actionCheck;
+	private bool hasDowned;
 
 	// Use this for initialization
 	void Start () {
@@ -64,24 +65,41 @@ public class ActionManager : MonoBehaviour {
 	void RegisterEvent(GameObject icon, Icon icon_enum) {
 		EventTrigger.Entry entry = new EventTrigger.Entry();
 		entry.eventID = EventTriggerType.PointerEnter;
-		entry.callback.AddListener( (x) => { Event(icon_enum);} );
+		entry.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.PointerEnter);} );
 
-//		EventTrigger.Entry pointer_down = new EventTrigger.Entry();
-//		pointer_down.eventID = EventTriggerType.PointerDown;
-//		pointer_down.callback.AddListener( (x) => { Event(icon_enum);} );
+		EventTrigger.Entry pointer_down = new EventTrigger.Entry();
+		pointer_down.eventID = EventTriggerType.PointerDown;
+		pointer_down.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.PointerDown);} );
 
 		EventTrigger.Entry pointer_up = new EventTrigger.Entry();
 		pointer_up.eventID = EventTriggerType.PointerUp;
-		pointer_up.callback.AddListener( (x) => { Event(Icon.POINTER_UP);} );
+		pointer_up.callback.AddListener( (x) => { Event(Icon.POINTER_UP, EventTriggerType.PointerUp);} );
 
 		EventTrigger trigger = icon.GetComponent<EventTrigger>();
 		trigger.triggers.Add(entry);
-//		trigger.triggers.Add(pointer_down);
+		trigger.triggers.Add(pointer_down);
 		trigger.triggers.Add(pointer_up);
 	}
 
-	void Event(Icon icon_enum)
+	void Event(Icon icon_enum, EventTriggerType eventType)
 	{
+		switch (eventType) {
+		case EventTriggerType.PointerEnter:
+			if (!hasDowned) {
+				return;
+			}
+			break;
+		case EventTriggerType.PointerDown:
+			hasDowned = true;
+			break;
+		case EventTriggerType.PointerUp:
+			hasDowned = false;
+			break;
+		default:
+			Debug.LogAssertion ("Event Error. Type:" + eventType);
+			break;
+		}
+
 		if (actionCheck) {
 			input_order_list.Add (icon_enum);
 			DebugInput ();
