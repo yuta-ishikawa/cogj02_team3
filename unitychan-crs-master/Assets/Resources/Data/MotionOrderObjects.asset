@@ -12,18 +12,33 @@ MonoBehaviour:
   m_Name: MotionOrderObjects
   m_EditorClassIdentifier: 
   _motionOrders:
-  - startTimePoint: 10
-    motionOrderObject: {fileID: 11400000, guid: ebefa63b40dee4f649a6f102081b03ad,
+  - startTimePoint: 5
+    motionOrderObject: {fileID: 11400000, guid: a39cf7b3052424841ad359773c70e346,
       type: 2}
-  - startTimePoint: 20
-    motionOrderObject: {fileID: 11400000, guid: ebefa63b40dee4f649a6f102081b03ad,
+  - startTimePoint: 15
+    motionOrderObject: {fileID: 11400000, guid: fd30d90627eab4031b491bf51c6400bb,
       type: 2}
-  - startTimePoint: 30
-    motionOrderObject: {fileID: 11400000, guid: ebefa63b40dee4f649a6f102081b03ad,
+  - startTimePoint: 25
+    motionOrderObject: {fileID: 11400000, guid: 9e8134cd11da84fddb59c04b0b90300b,
       type: 2}
-  - startTimePoint: 40
-    motionOrderObject: {fileID: 11400000, guid: 9e318958cfbed4753be6b74971ea5fc7,
+  - startTimePoint: 35
+    motionOrderObject: {fileID: 11400000, guid: 668c37248c4be4ceabf9d6a9e76cf882,
       type: 2}
-  - startTimePoint: 50
-    motionOrderObject: {fileID: 11400000, guid: 9e318958cfbed4753be6b74971ea5fc7,
+  - startTimePoint: 45
+    motionOrderObject: {fileID: 11400000, guid: 5994805011be74a25aae5fc072f081cb,
+      type: 2}
+  - startTimePoint: 55
+    motionOrderObject: {fileID: 11400000, guid: aa7a799f22e7c439c8ba92cd5b999b9a,
+      type: 2}
+  - startTimePoint: 65
+    motionOrderObject: {fileID: 11400000, guid: e7cce0916bd85437c9dac87326d9eaa9,
+      type: 2}
+  - startTimePoint: 75
+    motionOrderObject: {fileID: 11400000, guid: d63831b86541d4f15ae7644976ecc5d8,
+      type: 2}
+  - startTimePoint: 85
+    motionOrderObject: {fileID: 11400000, guid: 254764db30ff34aa3bfdacfdd5d5d3d9,
+      type: 2}
+  - startTimePoint: 95
+    motionOrderObject: {fileID: 11400000, guid: 5994805011be74a25aae5fc072f081cb,
       type: 2}
