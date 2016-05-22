@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ResultVoice : MonoBehaviour {
 
@@ -36,6 +37,9 @@ public class ResultVoice : MonoBehaviour {
 		Debug.LogAssertion(rank + "Voice Clip Is null!!!!");
 	}
 
+	// 最高評価かどうか
+	public bool IsMaxRank() { return rank == ScoreRank.Perfect ? true : false; }
+
 	// Use this for initialization
 	void Start () {
 		audioSource = GetComponent<AudioSource>();
@@ -43,6 +47,18 @@ public class ResultVoice : MonoBehaviour {
 	}
 
 	// 一応任意のタイミングでボイス再生
-	public void PlayVoice() { audioSource.Play(); }
+	public void PlayVoice(Action callBack)
+	{
+		audioSource.Play();
+		StartCoroutine(PlayingVoice(callBack));
+	}
+
+	IEnumerator PlayingVoice(Action callBack)
+	{
+		if (audioSource.isPlaying) yield return null;
+
+		// ボイスが終わったらコールバック
+		callBack();
+	}
 
 }
