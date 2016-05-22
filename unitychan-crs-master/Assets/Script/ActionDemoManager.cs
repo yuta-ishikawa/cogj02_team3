@@ -33,7 +33,7 @@ public class ActionDemoManager : MonoBehaviour {
 		// List<ActionManager.Icon> order = new List<ActionManager.Icon>{ (ActionManager.Icon)0, (ActionManager.Icon)2, (ActionManager.Icon)0, (ActionManager.Icon)3, (ActionManager.Icon)5, (ActionManager.Icon)5, (ActionManager.Icon)3 };
 //		 List<ActionManager.Icon> order = new List<ActionManager.Icon>{ 0, 2 };
 		 // float time = 10.0f;
-		 Next (order, "", time);
+//		 Next (order, "", time);
 	}
 	
 	// Update is called once per frame
