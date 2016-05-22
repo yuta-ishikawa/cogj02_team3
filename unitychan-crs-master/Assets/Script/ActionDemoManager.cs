@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ActionDemoManager : MonoBehaviour {
 
@@ -28,12 +29,9 @@ public class ActionDemoManager : MonoBehaviour {
 		this.position_list.Add(GameObject.Find("bottom_right").transform.position);
 		this.position_list.Add(new Vector3(222, 125, 0));
 
-		
-//		 List<ActionManager.Icon> order = new List<ActionManager.Icon>{ 0, 3, 1, 4, 2, 5 };
-		// List<ActionManager.Icon> order = new List<ActionManager.Icon>{ (ActionManager.Icon)0, (ActionManager.Icon)2, (ActionManager.Icon)0, (ActionManager.Icon)3, (ActionManager.Icon)5, (ActionManager.Icon)5, (ActionManager.Icon)3 };
-//		 List<ActionManager.Icon> order = new List<ActionManager.Icon>{ 0, 2 };
-		 // float time = 10.0f;
-//		 Next (order, "", time);
+//		List<ActionManager.Icon> order = new List<ActionManager.Icon>{ (ActionManager.Icon)0, (ActionManager.Icon)2, ActionManager.Icon.POINTER_UP, (ActionManager.Icon)3, (ActionManager.Icon)5, (ActionManager.Icon)5, (ActionManager.Icon)3 };
+//		float time = 10.0f;
+//		Next (order, "", time);
 	}
 	
 	// Update is called once per frame
@@ -67,11 +65,15 @@ public class ActionDemoManager : MonoBehaviour {
 
 	private void SimpleAction(int current, int before, float time, int action_count){
 		Vector3[] movepath = new Vector3[2];
-		movepath [0] = this.position_list[(int)ActionManager.Icon.MIDDLE_CENTER];
-		movepath [1] = this.position_list[current];
-
+		if(current != (int)ActionManager.Icon.POINTER_UP) {
+			movepath [0] = this.position_list[(int)ActionManager.Icon.MIDDLE_CENTER];
+			movepath [1] = this.position_list[current];
+		}
+			
 		if (current == (int)ActionManager.Icon.POINTER_UP) {
 			//タップ演出
+			FadeOutHand(time/2, time * action_count);
+			FadeInHand(time/2, time * action_count + time/2);
 		} else if (isThroughCenter(current, before)) {
 			iTween.MoveTo (this.hand, iTween.Hash ("path", movepath,
 				                                   "time", time,
@@ -81,6 +83,19 @@ public class ActionDemoManager : MonoBehaviour {
 				                                   "time", time,
 				                                   "delay", time * action_count));
 		}
+	}
+
+	private void FadeInHand(float time, float delay) {
+		// SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
+		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", time, "delay", delay, "onupdate", "SetValue"));
+	}
+	private void FadeOutHand(float time, float delay) {
+		// SetValue()を毎フレーム呼び出して、１秒間に１から０までの値の中間値を渡す
+		iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", time, "delay", delay, "onupdate", "SetValue"));
+	}
+	private void SetValue(float alpha) {
+		// iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
+		this.hand.GetComponent<RawImage>().color = new Vector4(255, 255, 255, alpha);
 	}
 
 
