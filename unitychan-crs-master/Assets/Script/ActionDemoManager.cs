@@ -40,10 +40,10 @@ public class ActionDemoManager : MonoBehaviour {
 
 		
 		//		 List<ActionManager.Icon> order = new List<ActionManager.Icon>{ 0, 3, 1, 4, 2, 5 };
-		List<ActionManager.Icon> order = new List<ActionManager.Icon>{ (ActionManager.Icon)0, (ActionManager.Icon)2, (ActionManager.Icon)0, (ActionManager.Icon)3, (ActionManager.Icon)5, (ActionManager.Icon)5, (ActionManager.Icon)3 };
+//		List<ActionManager.Icon> order = new List<ActionManager.Icon>{ (ActionManager.Icon)0, (ActionManager.Icon)2, (ActionManager.Icon)0, (ActionManager.Icon)3, (ActionManager.Icon)5, (ActionManager.Icon)5, (ActionManager.Icon)3 };
 		// List<ActionManager.Icon> order = new List<ActionManager.Icon>{ 0, 2 };
-		 float time = 10.0f;
-		 Next (order, "", time);
+//		 float time = 10.0f;
+//		 Next (order, "", time);
 	}
 	
 	// Update is called once per frame
@@ -68,7 +68,7 @@ public class ActionDemoManager : MonoBehaviour {
 		for(int i =0; i<order.Count; i++){
 			if (i == 0) {
 				SimpleAction ((int)order [i], (int)order [i], one_action_time, i);
-			} else if (order.Count > i) {
+			} else if (order.Count - 1 > i) {
 				SimpleAction ((int)order [i], (int)order [i - 1], one_action_time, i);
 			} else
 				LastSimpleAction((int)order [i], one_action_time, i);
