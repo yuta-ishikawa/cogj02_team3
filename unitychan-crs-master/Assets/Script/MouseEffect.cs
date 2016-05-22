@@ -5,12 +5,14 @@ public class MouseEffect : MonoBehaviour {
 	
 	// 追尾するパーティクル
 	public ParticleSystem particle;
+	// 離したときに生成するパーティクル
+	public GameObject releaseParticle;
 	// カメラ
 	public Camera cam;
 
 	// Use this for initialization
 	void Start () {
-
+		cam = Camera.main;
 	}
 
 	// Update is called once per frame
@@ -38,7 +40,8 @@ public class MouseEffect : MonoBehaviour {
 				// パーティクルを止めて全消去
 				particle.Stop();
 				particle.Clear();
-
+				// 離したとき用のパーティクル生成
+				Instantiate(releaseParticle, cam.ScreenToWorldPoint(Input.mousePosition + cam.transform.forward * 10), Quaternion.identity) ;
 			}
 		}
 	}
