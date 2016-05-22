@@ -31,6 +31,10 @@ public class ActionManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		// 速攻でフェード終了
+		// メインに遷移後すぐにFadeOutを完了させる
+		ScreenFadeManager.Instance.FadeOut(0.01f, new Color(1.0f, 1.0f, 1.0f), delegate { Debug.Log("OK"); });
+
 		stageManager = GameObject.FindObjectOfType<StageManager> ();
 
 		top_left = GameObject.Find("top_left");

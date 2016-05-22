@@ -9,35 +9,21 @@ public class ResultText : MonoBehaviour {
 	[SerializeField]
 	private Text resultText;
 
-	// ここはGameManagerクラスが確立したら消す
-	private enum ScoreRank
-	{
-		None = -1, TooBad, Bad, Good, Great, Perfect
-	};
-
-	[SerializeField, Tooltip("デバッグ兼確認用")]
-	private ScoreRank rank = ScoreRank.None;
-
-	private void SetTextData()
+	public void SetTextData(ResultScoreRank rank)
 	{
 		// 異常値チェック
-		if (rank == ScoreRank.None)
+		if (rank == ResultScoreRank.None)
 		{
 			Debug.LogAssertion("Rank Is Assertion!!!!");
 			return;
 		}
 
-		// ランクに応じて表情設定
+		// ランクに応じてテキスト設定
 		resultText.text = textObj.texts[(int)rank];
 
 		// nullチェック
 		if (!string.IsNullOrEmpty(resultText.text)) return;
 
 		Debug.LogAssertion(rank + "Text Is null!!!!");
-	}
-
-	// Use this for initialization
-	void Start () {
-		SetTextData();
 	}
 }
