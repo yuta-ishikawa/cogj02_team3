@@ -16,6 +16,8 @@ public class ActionDemoManager : MonoBehaviour {
 	private Vector3 bottom_right;
 	private Vector3 middle_center;
 
+	private bool hasDowned;
+
 	// Use this for initialization
 	void Start () {
 		stageManager = GameObject.FindObjectOfType<StageManager> ();
