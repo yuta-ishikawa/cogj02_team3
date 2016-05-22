@@ -22,6 +22,8 @@ public class StageManager : MonoBehaviour {
 	[SerializeField]
 	private FadeParam fadeParam;
 
+	private bool resultLoaded;
+
 	void Start () {
 		motionOrders = motionOrderObjects.motionOrders;
 
@@ -33,12 +35,15 @@ public class StageManager : MonoBehaviour {
 		GameObject musicPlayer = GameObject.FindObjectOfType<StageDirector> ().GetMusicPlayer (); 
 		music = musicPlayer.transform.FindChild ("Main").GetComponent<AudioSource>();
 		actionCheck = false;
+
+		resultLoaded = false; 
 	}
 
 	void Update () {			
 		float musicTime = music.time;
 
-		if (musicTime > 103) {
+		if (musicTime > 103 && !resultLoaded) {
+			resultLoaded = true;
 			ScreenFadeManager.Instance.FadeIn(fadeParam.time, fadeParam.color,
 				delegate {
 					Debug.Log("Fade In OK");
