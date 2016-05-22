@@ -267,7 +267,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voiceObj: {fileID: 11400000, guid: a7d27abffbd64a040a843a23755249b2, type: 2}
-  rank: 4
 --- !u!1 &196588454
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +568,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faceRawImage: {fileID: 1750704000}
   images: {fileID: 11400000, guid: 8c10418f4db99c34baddb10101c40d56, type: 2}
-  rank: 4
 --- !u!114 &478645576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,7 +801,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textObj: {fileID: 11400000, guid: 23d0bffb47aef0540a0fd34d83a9f803, type: 2}
   resultText: {fileID: 1739645125}
-  rank: 4
 --- !u!1 &976718370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,10 +1167,13 @@ MonoBehaviour:
   fadeParam:
     _time: 1
     _color: {r: 0, g: 0, b: 0, a: 1}
+  faceChanger: {fileID: 478645575}
   resultVoice: {fileID: 165479407}
+  resultText: {fileID: 836356940}
   scoreResult: {fileID: 1898556915}
   scoreText: {fileID: 1279762258}
   particle: {fileID: 1077433698}
+  tensionTable: {fileID: 11400000, guid: 0bb0c04c395e33c4498c24fb59041602, type: 2}
 --- !u!1 &1279762256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,7 +1368,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: "\u3044\u3048\u30FC\u3044"
 --- !u!222 &1739645126
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1522,6 +1522,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8370c8b982c5ae04486cf253bbbc7a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  addScale: 0.08
+  stateType: 0
 --- !u!1 &1956632794
 GameObject:
   m_ObjectHideFlags: 0

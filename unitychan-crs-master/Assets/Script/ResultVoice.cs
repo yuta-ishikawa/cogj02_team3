@@ -4,25 +4,20 @@ using System;
 
 public class ResultVoice : MonoBehaviour {
 
-	// ここはGameManagerクラスが確立したら消す
-	private enum ScoreRank
-	{
-		None = -1, TooBad, Bad, Good, Great, Perfect
-	};
-
 	[SerializeField, Tooltip("上からTooBad～Perfectの順に設定すること")]
 	private ResultVoiceObject voiceObj;
-
-	[SerializeField, Tooltip("デバッグ兼確認用")]
-	private ScoreRank rank = ScoreRank.None;
-
+	
 	// 念のためコンポーネント格納用の変数を用意
 	private AudioSource audioSource;
 
-	private void SetVoice()
+	ResultScoreRank tmpRank;
+
+	public void SetVoice(ResultScoreRank rank)
 	{
+		tmpRank = rank;
+
 		// 異常値チェック
-		if (rank == ScoreRank.None)
+		if (rank == ResultScoreRank.None)
 		{
 			Debug.LogAssertion("Rank Is Assertion!!!!");
 			return;
@@ -38,12 +33,11 @@ public class ResultVoice : MonoBehaviour {
 	}
 
 	// 最高評価かどうか
-	public bool IsMaxRank() { return rank == ScoreRank.Perfect ? true : false; }
+	public bool IsMaxRank() { return tmpRank == ResultScoreRank.Perfect ? true : false; }
 
 	// Use this for initialization
 	void Start () {
 		audioSource = GetComponent<AudioSource>();
-		SetVoice();
 	}
 
 	// 一応任意のタイミングでボイス再生
@@ -55,9 +49,10 @@ public class ResultVoice : MonoBehaviour {
 
 	IEnumerator PlayingVoice(Action callBack)
 	{
-		if (audioSource.isPlaying) yield return null;
-
-		// ボイスが終わったらコールバック
+		while (audioSource.isPlaying)
+		{
+			yield return new WaitForSeconds(0.1f);
+		}
 		callBack();
 	}
 

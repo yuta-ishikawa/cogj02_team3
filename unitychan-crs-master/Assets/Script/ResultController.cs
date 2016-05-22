@@ -11,16 +11,27 @@ public class ResultController : MonoBehaviour {
 	[SerializeField]
 	private FadeParam		fadeParam = null;
 	[SerializeField]
+	private ResultFaceChanger faceChanger;
+	[SerializeField]
 	private ResultVoice		resultVoice;
+	[SerializeField]
+	private ResultText		resultText;
 	[SerializeField]
 	private GameObject		scoreResult;
 	[SerializeField]
 	private Text			scoreText;
 	[SerializeField]
 	private ParticleSystem	particle;
+	[SerializeField]
+	private TensionTableObject tensionTable;
 
 	//private 
 	private string[] resultRankStr = { "TooBad", "Bad", "Good", "Great", "Perfect" };
+
+	static private ResultScoreRank rank = ResultScoreRank.None;
+
+	// テンションの結果に応じてタイプを返す
+	ResultScoreRank getRank() { return rank; }
 
 	void Awake()
 	{		
@@ -40,6 +51,20 @@ public class ResultController : MonoBehaviour {
 			scoreList[2] + Environment.NewLine +
 			scoreList[1] + Environment.NewLine +
 			scoreList[0];
+
+		// テンション結果からランク決定
+		int tmp = 0;
+		foreach (var num in tensionTable.table)
+		{
+			if (num <= GameManager.Instance.GetScore()) break;
+			++tmp;
+		}
+		rank = (ResultScoreRank)tmp;
+
+		faceChanger.SetFaceImage(rank);
+		resultVoice.SetVoice(rank);
+		resultText.SetTextData(rank);
+
 	}
 
 	void Start()
@@ -50,7 +75,8 @@ public class ResultController : MonoBehaviour {
 				Debug.Log("Fade Out OK");
 				resultVoice.PlayVoice(delegate{
 					// ポップアップの表示を行う
-
+					scoreResult.SetActive(true);
+					scoreResult.GetComponent<ScaleUp>().StartScaleUp();
 					// 最高ランクならパーティクルも再生
 					if (resultVoice.IsMaxRank()) particle.Play();
 				});

@@ -19,7 +19,7 @@ public class ScaleUp : MonoBehaviour {
 
 	public void StartScaleUp()
 	{
-		//stateType
+		stateType = StateType.Up;
 	}
 
 	// Update is called once per frame
@@ -28,6 +28,13 @@ public class ScaleUp : MonoBehaviour {
 
 
 		nowScale += new Vector3(addScale, addScale, addScale);
-
+		gameObject.transform.localScale = nowScale;
+		// 拡大率1.0fまでいったらおわり
+		if(nowScale.x >= 1.0f)
+		{
+			nowScale.Set(1.0f, 1.0f, 1.0f);
+			gameObject.transform.localScale = nowScale;
+			stateType = StateType.Success;
+		}
 	}
 }
