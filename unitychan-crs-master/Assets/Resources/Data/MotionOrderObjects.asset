@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59aeb0af37864a2cacc27b22ae92672, type: 3}
+  m_Name: MotionOrderObjects
+  m_EditorClassIdentifier: 
+  _motionOrders:
+  - startTimePoint: 5
+    motionOrderObject: {fileID: 11400000, guid: 96fe63e5a107941e88aaf7b2b8f3ab42,
+      type: 2}
+  - startTimePoint: 15
+    motionOrderObject: {fileID: 11400000, guid: 96fe63e5a107941e88aaf7b2b8f3ab42,
+      type: 2}
+  - startTimePoint: 25
+    motionOrderObject: {fileID: 11400000, guid: 96fe63e5a107941e88aaf7b2b8f3ab42,
+      type: 2}
+  - startTimePoint: 35
+    motionOrderObject: {fileID: 11400000, guid: 668c37248c4be4ceabf9d6a9e76cf882,
+      type: 2}

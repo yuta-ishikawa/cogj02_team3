@@ -10,11 +10,6 @@ public class MotionOrderObject : ScriptableObject {
 	public new string name {
 		get { return _name; }
 	}
-	[SerializeField, Tooltip("モーション開始時刻")]
-	private float _startTimePoint;
-	public float startTimePoint {
-		get { return _startTimePoint; }
-	}
 	[SerializeField, Tooltip("お手本再生時間")]
 	private float _demoTime;
 	public float demoTime {
@@ -31,11 +26,6 @@ public class MotionOrderObject : ScriptableObject {
 		get { return _order; }
 	}
 
-	public bool hasUsed { get; set; }
 	public GameManager.JudgementState judge { get; set; }
-
-	void OnEnable() {
-		hasUsed = false;
-	}
 }
 

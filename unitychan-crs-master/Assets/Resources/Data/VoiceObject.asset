@@ -44,10 +44,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9e533990dcfa1497698c068992167b02, type: 3}
   - {fileID: 8300000, guid: 8513b1dd5b2e843e0a70f372114c198f, type: 3}
   _perfectVoiceClips:
-  - {fileID: 8300000, guid: 78a55181494ff4fefa799eb5c9b92cdd, type: 3}
-  - {fileID: 8300000, guid: f4349c82f59184617b87601edf6eba5c, type: 3}
-  - {fileID: 8300000, guid: 90a9121344abf4e4c8ab9f8b342f834b, type: 3}
-  - {fileID: 8300000, guid: bc5f9281b7cb74746b5bd44bff336364, type: 3}
-  - {fileID: 8300000, guid: c326016f840dc439e8f62089e97facdd, type: 3}
-  - {fileID: 8300000, guid: 32ebf5e36d01f4cf9a83c072f41cf4a0, type: 3}
-  - {fileID: 8300000, guid: da54d6b2054fd4ccab4d6992f853c84c, type: 3}
+  - {fileID: 8300000, guid: 9635a09a20c2d4d528ee2f6d125c16dc, type: 3}
+  - {fileID: 8300000, guid: b1afe8f323c774060a05bb610a4c4bf4, type: 3}
+  - {fileID: 8300000, guid: feb770838933e41d998a38c3487bc8e2, type: 3}
+  - {fileID: 8300000, guid: a1099e5712981486cbb82f39a4e03d29, type: 3}
+  - {fileID: 8300000, guid: fbcbaa749d51a498eb362586f7aa4255, type: 3}
+  - {fileID: 8300000, guid: ed26255aa8ea14ffe80ac3b10207b58a, type: 3}
+  - {fileID: 8300000, guid: 7027343544bc64d3fac265a0056544bd, type: 3}
+  - {fileID: 8300000, guid: 25c30cca23f3b4022aab5482624ae096, type: 3}
+  - {fileID: 8300000, guid: 83503b5c0dbac44278a5e595a4eea824, type: 3}

@@ -7,7 +7,7 @@ public class StageManager : MonoBehaviour {
 
 	[SerializeField]
 	private MotionOrderObjects motionOrderObjects;
-	private MotionOrderObject[] motionOrders;
+	private MotionOrderObjects.MotionOrder[] motionOrders;
 
 	private ActionDemoManager actionDemoManager;
 	private ActionManager actionManager;
@@ -46,15 +46,15 @@ public class StageManager : MonoBehaviour {
 			if (! motionOrder.hasUsed) {
 				if (motionOrder.startTimePoint <= musicTime) {
 					// DEBUG
-					Debug.Log ("<color=green>" + motionOrder.name + "</color> : " + musicTime);
+					Debug.Log ("<color=green>" + motionOrder.motionOrderObject.name + "</color> : " + musicTime);
 					string str = "";
-					for (int i = 0; i< motionOrder.order.Count; i++){
-						str = str + motionOrder.order[i] + ", ";
+					for (int i = 0; i< motionOrder.motionOrderObject.order.Count; i++){
+						str = str + motionOrder.motionOrderObject.order[i] + ", ";
 					}
 					Debug.Log(str);
 
 					motionOrder.hasUsed = true;
-					currentMotionOrder = motionOrder;
+					currentMotionOrder = motionOrder.motionOrderObject;
 					StartNextDemo ();
 				}
 			}
