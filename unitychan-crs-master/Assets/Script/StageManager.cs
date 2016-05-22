@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour {
 
@@ -18,6 +19,9 @@ public class StageManager : MonoBehaviour {
 	private AudioSource music;
 	private bool actionCheck;
 
+	[SerializeField]
+	private FadeParam fadeParam;
+
 	void Start () {
 		motionOrders = motionOrderObjects.motionOrders;
 
@@ -33,6 +37,19 @@ public class StageManager : MonoBehaviour {
 
 	void Update () {			
 		float musicTime = music.time;
+
+		if (musicTime > 5) {
+			ScreenFadeManager.Instance.FadeIn(fadeParam.time, fadeParam.color,
+				delegate {
+					Debug.Log("Fade In OK");
+					SceneManager.LoadScene("Result");
+					// メインに遷移後すぐにFadeOutを完了させる
+					ScreenFadeManager.Instance.FadeOut(0.01f, new Color(1.0f, 1.0f, 1.0f), delegate { Debug.Log("OK"); });
+				});
+
+			return;
+		}
+
 		foreach (var motionOrder in motionOrders) {
 			if (! motionOrder.hasUsed) {
 				if (motionOrder.startTimePoint <= musicTime) {

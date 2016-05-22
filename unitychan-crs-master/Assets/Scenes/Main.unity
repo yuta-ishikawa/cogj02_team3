@@ -1173,6 +1173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motionOrderObjects: {fileID: 11400000, guid: 24bb46202590a49f3a2f7031740f8306, type: 2}
+  fadeParam:
+    _time: 3
+    _color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!4 &1824127698
 Transform:
   m_ObjectHideFlags: 0
