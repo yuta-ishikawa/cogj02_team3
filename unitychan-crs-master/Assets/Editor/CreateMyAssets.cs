@@ -76,4 +76,8 @@ public class CreateMyAssets : MonoBehaviour {
 		CreateAssets<MotionOrderObjects> ();
 	}
 
+	[MenuItem("Assets/Create/CreateVoiceObject")]
+	public static void CreateVoiceObject() {
+		CreateAssets<VoiceObject> ();
+	}
 }

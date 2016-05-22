@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: MotionSample
   m_EditorClassIdentifier: 
   _name: MotionSample
-  _startTimePoint: 5
+  _startTimePoint: 20
   _demoTime: 5
   _actionTimeLimit: 5
-  _order: 020000000100000000000000030000000400000005000000
+  _order: 000000000100000002000000050000000400000003000000

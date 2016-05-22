@@ -13,3 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _motionOrders:
   - {fileID: 11400000, guid: 668c37248c4be4ceabf9d6a9e76cf882, type: 2}
+  - {fileID: 11400000, guid: afa65444ecbc24f5cbdcf14de8631bc4, type: 2}
+  - {fileID: 11400000, guid: afa65444ecbc24f5cbdcf14de8631bc4, type: 2}
+  - {fileID: 11400000, guid: afa65444ecbc24f5cbdcf14de8631bc4, type: 2}
+  - {fileID: 11400000, guid: afa65444ecbc24f5cbdcf14de8631bc4, type: 2}
