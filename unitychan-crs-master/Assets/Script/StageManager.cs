@@ -81,8 +81,20 @@ public class StageManager : MonoBehaviour {
 	}
 
 	public void SuccessAction() {
-		// TODO 残り時間に応じた評価
-		FinishAction(GameManager.JudgementState.PERFECT);
+		float remainTimeRate = timeManager.GetRemainTimeRate ();
+		GameManager.JudgementState judge;
+		if (remainTimeRate > 0.7f) {
+			judge = GameManager.JudgementState.PERFECT;
+		} else if (remainTimeRate > 0.5f) {
+			judge = GameManager.JudgementState.GREAT;
+		} else if (remainTimeRate > 0.3f) {
+			judge = GameManager.JudgementState.GOOD;
+		} else if (remainTimeRate > 0.1f) {
+			judge = GameManager.JudgementState.POOR;
+		} else {
+			judge = GameManager.JudgementState.BAD;
+		}
+		FinishAction(judge);
 	}
 
 	void FinishAction(GameManager.JudgementState judge) {
