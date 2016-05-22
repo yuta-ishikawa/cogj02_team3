@@ -108,8 +108,8 @@ public class ActionManager : MonoBehaviour {
 
 		if (actionCheck) {
 			input_order_list.Add (icon_enum);
-			tap_object = icon;
-			FadeInHand();
+			if (tap_object == null) tap_object = icon;
+			FadeInIcon();
 			DebugInput ();
 
 			int result = Compare ();
@@ -127,17 +127,23 @@ public class ActionManager : MonoBehaviour {
 		}
 	}
 
-	private void FadeInHand() {
+	private void FadeInIcon() {
 		// SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
-		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", 1.0f, "delay", 0, "loopType", "none", "onupdate", "SetValue"));
+		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", 0.3f, "delay", 0, "loopType", "none", "onupdate", "SetIconValue", "oncomplete", "FadeComplete"));
 	}
-	private void FadeOutHand() {
+	private void FadeOutIcon() {
 		// SetValue()を毎フレーム呼び出して、１秒間に１から０までの値の中間値を渡す
-		iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", 1.0f, "delay", 0, "loopType", "none", "onupdate", "SetValue"));
+		iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", 0.5f, "delay", 0, "loopType", "none", "onupdate", "SetIconValue"));
 	}
-	private void SetValue(float alpha) {
+	private void SetIconValue(float alpha) {
 		// iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
-		this.tap_object.GetComponent<RawImage>().color = new Vector4(255, 255, 255, alpha);
+		if (tap_object != null) {
+			this.tap_object.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		}
+	}
+
+	void FadeComplete() {
+		tap_object = null;
 	}
 
 	int Compare(){
