@@ -9,9 +9,17 @@ public class Reaction : MonoBehaviour {
 	private Sprite[] judgeResultSprites;
 	[SerializeField]
 	private GameObject jugmentResultImage;
+	[SerializeField]
+	private VoiceObject voiceObject;
+	private List<List<AudioClip>> voiceList;
+	private AudioSource audioSource;
 
 	void Start () {
-//		CreateReaction (GameManager.JudgementState.PERFECT, Vector3.zero); //DBEUG
+		voiceList = new List<List<AudioClip>> ();
+		for (int i = 0; i < (int)GameManager.JudgementState.JUDGEMENT_STATE_NUM; i++) {
+			voiceList.Add(Util.Choose(i+1, voiceObject.missVoiceClips, voiceObject.badVoiceClips, voiceObject.poorVoiceClips, voiceObject.goodVoiceClips, voiceObject.greatVoiceClips, voiceObject.perfectVoiceClips));
+		}
+		audioSource = this.GetComponent<AudioSource>();
 	}
 
 	public void CreateReaction(GameManager.JudgementState judge, Vector3 judgeResultPosition) {
@@ -22,28 +30,12 @@ public class Reaction : MonoBehaviour {
 		judgeResult.GetComponent<RectTransform>().localPosition = judgeResultPosition;
 
 		// ボイスの再生
-		string voiceName = "";
-		switch (judge){
-		case GameManager.JudgementState.MISS:
-			voiceName = "shinjae";
-			break;
-		case GameManager.JudgementState.BAD:
-			voiceName = "sample";
-			break;
-		case GameManager.JudgementState.POOR:
-			voiceName = "sample";
-			break;
-		case GameManager.JudgementState.GOOD:
-			voiceName = "aishiteru";
-			break;
-		case GameManager.JudgementState.GREAT:
-			voiceName = "aishiteru";
-			break;
-		case GameManager.JudgementState.PERFECT:
-			voiceName = "aishiteru";
-			break;
+		AudioClip voice = voiceList [(int)judge] [UnityEngine.Random.Range (0, voiceList [(int)judge].Count)];
+		if (voice == null) {
+			Debug.LogAssertion (judge + "Voice Clip Is null!!");
 		}
-		AudioManager.Instance.PlaySE(voiceName);
+		audioSource.clip = voice;
+		audioSource.Play ();
 
 		// スコア加算
 		GameManager.Instance.AddScore(judge);

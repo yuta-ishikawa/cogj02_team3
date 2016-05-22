@@ -10,4 +10,15 @@ public static class Util {
 		return false;
 	}
 
+	public static T Choose<T>(int index, params T[] args)
+	{
+		if (index < 1 || index > args.Length)
+		{
+			return default(T);
+		}
+		else
+		{
+			return args[--index];
+		}
+	}
 }

@@ -5,15 +5,14 @@ using System.Collections.Generic;
 
 
 public class ActionManager : MonoBehaviour {
-	[HideInInspector]public GameObject top_left;
-	[HideInInspector]public GameObject top_center;
-	[HideInInspector]public GameObject top_right;
-	[HideInInspector]public GameObject bottom_left;
-	[HideInInspector]public GameObject bottom_center;
-	[HideInInspector]public GameObject bottom_right;
-	[HideInInspector]public List<int> action_order_list;
-	[HideInInspector]public List<int> input_order_list;
-
+	private GameObject top_left;
+	private  GameObject top_center;
+	private  GameObject top_right;
+	private GameObject bottom_left;
+	private GameObject bottom_center;
+	private GameObject bottom_right;
+	private List<Icon> action_order_list;
+	private List<Icon> input_order_list;
 
 	public enum Icon{
 		POINTER_UP = -1,
@@ -23,20 +22,15 @@ public class ActionManager : MonoBehaviour {
 		BOTTOM_LEFT,
 		BOTTOM_CENTER,
 		BOTTOM_RIGHT,
+		MIDDLE_CENTER,
 	}
 
 	private StageManager stageManager;
+	private bool actionCheck;
 
 	// Use this for initialization
 	void Start () {
 		stageManager = GameObject.FindObjectOfType<StageManager> ();
-
-		action_order_list.Add (0);
-		action_order_list.Add (1);
-		action_order_list.Add (2);
-		action_order_list.Add (5);
-		action_order_list.Add (4);
-		action_order_list.Add (3);
 
 		top_left = GameObject.Find("top_left");
 		top_center = GameObject.Find("top_center");
@@ -51,6 +45,9 @@ public class ActionManager : MonoBehaviour {
 		RegisterEvent(bottom_left, Icon.BOTTOM_LEFT);
 		RegisterEvent(bottom_center, Icon.BOTTOM_CENTER);
 		RegisterEvent(bottom_right, Icon.BOTTOM_RIGHT);
+
+		actionCheck = false;
+		input_order_list = new List<Icon> ();
 	}
 
 
@@ -59,7 +56,7 @@ public class ActionManager : MonoBehaviour {
 
 	}
 
-	void StartInput()
+	void ResetInput()
 	{
 		input_order_list.Clear();
 	}
@@ -83,21 +80,24 @@ public class ActionManager : MonoBehaviour {
 		trigger.triggers.Add(pointer_up);
 	}
 
-//	void 
 	void Event(Icon icon_enum)
 	{
-		input_order_list.Add((int)icon_enum);
-		DebugInput();
+		if (actionCheck) {
+			input_order_list.Add (icon_enum);
+			DebugInput ();
 
-		int result = Compare();
-		if (result == 1) {
-			Debug.Log ("Success");
-			input_order_list.Clear ();
-			stageManager.SuccessAction ();
-		} else if (result == -1) {
-			Debug.Log ("Miss");
-			input_order_list.Clear ();
-			stageManager.FailAction ();
+			int result = Compare ();
+			if (result == 1) {
+				Debug.Log ("Success");
+				stageManager.SuccessAction ();
+				actionCheck = false;
+				ResetInput ();
+			} else if (result == -1) {
+				Debug.Log ("Miss");
+				stageManager.FailAction ();
+				actionCheck = false;
+				ResetInput ();
+			}
 		}
 	}
 
@@ -130,13 +130,14 @@ public class ActionManager : MonoBehaviour {
 		Debug.Log(str);
 	}
 
-	public void Next(List<int> order) {
-		// 操作開始
-		// 終了はStageManager.FailAction または StageManager.SuccessAction
-		// もしくは時間切れが通知されるので停止
+	public void Next(List<Icon> order) {
+		action_order_list = order;
+		actionCheck = true;
+		ResetInput ();
 	}
 
 	public void TimeUp() {
-		// 失敗処理はStageManager側でします
+		actionCheck = false;
+		ResetInput();
 	}
 }

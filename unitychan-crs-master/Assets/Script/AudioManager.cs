@@ -15,7 +15,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager> {
 	private Dictionary<string,AudioClip> bgmDict = null;
 	private Dictionary<string,AudioClip> seDict = null;
 
-	public void Awake()
+	public void Start()
 	{
 		if(this != Instance)
 		{
@@ -28,7 +28,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager> {
 		//create listener
 		if(FindObjectsOfType(typeof(AudioListener)).All(o => !((AudioListener)o).enabled))
 		{
-//			this.gameObject.AddComponent<AudioListener>();	//DEBUG
+			this.gameObject.AddComponent<AudioListener>();	//DEBUG
 		}
 		//create audio sources
 		this.bgmSource = this.gameObject.AddComponent<AudioSource>();

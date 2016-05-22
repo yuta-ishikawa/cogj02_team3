@@ -115,4 +115,9 @@ public class StageDirector : MonoBehaviour
     {
         Application.LoadLevel(0);
     }
+
+	// Addtitional
+	public GameObject GetMusicPlayer() {
+		return musicPlayer;
+	}
 }

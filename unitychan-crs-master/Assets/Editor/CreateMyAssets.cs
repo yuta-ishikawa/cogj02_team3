@@ -52,6 +52,22 @@ public class CreateMyAssets : MonoBehaviour {
 		Selection.activeObject = obj;
 	}
 
+<<<<<<< HEAD
+=======
+	public static void CreateAssets<T>() where T : ScriptableObject{
+		// オブジェクト生成
+		T obj = ScriptableObject.CreateInstance<T>();
+
+		// オブジェクトを保存するパス
+		string path = AssetDatabase.GenerateUniqueAssetPath("Assets/Resources/Data/" + typeof(T) + ".asset");
+		AssetDatabase.CreateAsset(obj, path);
+		AssetDatabase.SaveAssets();
+
+		EditorUtility.FocusProjectWindow();
+		Selection.activeObject = obj;
+	}
+
+>>>>>>> acbb53fb1c90f8fc1026531f74d723c82fcb250f
 	[MenuItem("Assets/Create/CreateTensionStatus")]
 	public static void CreateTensionStatus()
 	{
@@ -68,6 +84,24 @@ public class CreateMyAssets : MonoBehaviour {
 		Selection.activeObject = obj;
 	}
 
+<<<<<<< HEAD
+=======
+	[MenuItem("Assets/Create/CreateMotionOrder")]
+	public static void CreateMotionOrder() {
+		CreateAssets<MotionOrderObject> ();
+	}
+
+	[MenuItem("Assets/Create/CreateMotionOrders")]
+	public static void CreateMotionOrders() {
+		CreateAssets<MotionOrderObjects> ();
+	}
+
+	[MenuItem("Assets/Create/CreateVoiceObject")]
+	public static void CreateVoiceObject() {
+		CreateAssets<VoiceObject> ();
+	}
+	
+>>>>>>> acbb53fb1c90f8fc1026531f74d723c82fcb250f
 	[MenuItem("Assets/Create/CreateTensionTable")]
 	public static void CreateTensionTable()
 	{
