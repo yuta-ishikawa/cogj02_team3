@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour {
 
@@ -18,6 +19,9 @@ public class StageManager : MonoBehaviour {
 	private AudioSource music;
 	private bool actionCheck;
 
+	[SerializeField]
+	private FadeParam fadeParam;
+
 	void Start () {
 		motionOrders = motionOrderObjects.motionOrders;
 
@@ -31,17 +35,21 @@ public class StageManager : MonoBehaviour {
 		actionCheck = false;
 	}
 
-	private bool startDemo = false;
-	// Update is called once per frame
-	void Update () {
-		// 出現条件に応じて、お手本開始
-		//DEBUG
-		if (startDemo) {
-			StartNextDemo ();
-			startDemo = false;
-		}
-			
+	void Update () {			
 		float musicTime = music.time;
+
+		if (musicTime > 105) {
+			ScreenFadeManager.Instance.FadeIn(fadeParam.time, fadeParam.color,
+				delegate {
+					Debug.Log("Fade In OK");
+					SceneManager.LoadScene("Result");
+					// メインに遷移後すぐにFadeOutを完了させる
+					ScreenFadeManager.Instance.FadeOut(0.01f, new Color(1.0f, 1.0f, 1.0f), delegate { Debug.Log("OK"); });
+				});
+
+			return;
+		}
+
 		foreach (var motionOrder in motionOrders) {
 			if (! motionOrder.hasUsed) {
 				if (motionOrder.startTimePoint <= musicTime) {
@@ -56,6 +64,7 @@ public class StageManager : MonoBehaviour {
 					motionOrder.hasUsed = true;
 					currentMotionOrder = motionOrder.motionOrderObject;
 					StartNextDemo ();
+					StartNextAction ();	//同時並行で入力も受け付ける仕様に変更
 				}
 			}
 		}
@@ -66,8 +75,6 @@ public class StageManager : MonoBehaviour {
 	}
 
 	public void FinishDemo() {
-		// お手本が終わったらアクション開始
-		StartNextAction();
 	}
 
 	void StartNextAction() {
@@ -83,13 +90,13 @@ public class StageManager : MonoBehaviour {
 	public void SuccessAction() {
 		float remainTimeRate = timeManager.GetRemainTimeRate ();
 		GameManager.JudgementState judge;
-		if (remainTimeRate > 0.7f) {
+		if (remainTimeRate > 0.3f) {
 			judge = GameManager.JudgementState.PERFECT;
-		} else if (remainTimeRate > 0.5f) {
+		} else if (remainTimeRate > 0.2f) {
 			judge = GameManager.JudgementState.GREAT;
-		} else if (remainTimeRate > 0.3f) {
-			judge = GameManager.JudgementState.GOOD;
 		} else if (remainTimeRate > 0.1f) {
+			judge = GameManager.JudgementState.GOOD;
+		} else if (remainTimeRate > 0.05f) {
 			judge = GameManager.JudgementState.POOR;
 		} else {
 			judge = GameManager.JudgementState.BAD;

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: MotionTest
   m_EditorClassIdentifier: 
   _name: MotionSample
-  _demoTime: 5
-  _actionTimeLimit: 5
+  _demoTime: 6
+  _actionTimeLimit: 9
   _order: 02000000

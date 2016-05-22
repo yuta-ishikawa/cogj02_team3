@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709801284827eed4bb51ce5192d1c8b2, type: 3}
   m_Name: TensionTableObject
   m_EditorClassIdentifier: 
-  _table: 0000000064000000c80000002c01000090010000
+  _table: 000000000500000014000000280000003c000000

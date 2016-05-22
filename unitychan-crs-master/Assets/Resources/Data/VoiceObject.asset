@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Name: VoiceObject
   m_EditorClassIdentifier: 
   _missVoiceClips:
-  - {fileID: 8300000, guid: f550fad0685364552b8f8e68049848cc, type: 3}
+  - {fileID: 8300000, guid: 903254b8bbcdd4e80856904a5f3fdf79, type: 3}
   - {fileID: 8300000, guid: 3c628ac6b51a848eab8cd15fef857f5d, type: 3}
   - {fileID: 8300000, guid: c8fbe27c8acbc4ffd9b5399dde93421e, type: 3}
   - {fileID: 8300000, guid: 268bb24bad7f44154ad7c5c2134085bf, type: 3}
+  - {fileID: 8300000, guid: 404f8fcbeaadd437cb360e384053b562, type: 3}
+  - {fileID: 8300000, guid: 7405f9df50c6644ebaccaccaa2855ffd, type: 3}
+  - {fileID: 8300000, guid: 3791189f04e124c178f5d3d38b43cdfd, type: 3}
+  - {fileID: 8300000, guid: c8fbe27c8acbc4ffd9b5399dde93421e, type: 3}
+  - {fileID: 8300000, guid: 6abfceb1420c44fd4b71829240b0df0a, type: 3}
+  - {fileID: 8300000, guid: 70cc3273f1a074379888cd3ec1ae9988, type: 3}
   _badVoiceClips:
   - {fileID: 8300000, guid: b27c6e3142b4b4bd6bff80079d587079, type: 3}
   - {fileID: 8300000, guid: b40cb669649da45dd87fe75fe54173b7, type: 3}
@@ -44,8 +50,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9e533990dcfa1497698c068992167b02, type: 3}
   - {fileID: 8300000, guid: 8513b1dd5b2e843e0a70f372114c198f, type: 3}
   _perfectVoiceClips:
-  - {fileID: 8300000, guid: 9635a09a20c2d4d528ee2f6d125c16dc, type: 3}
-  - {fileID: 8300000, guid: b1afe8f323c774060a05bb610a4c4bf4, type: 3}
+  - {fileID: 8300000, guid: 4aab5a50d2c894a878bf770680b2a84c, type: 3}
+  - {fileID: 8300000, guid: b49cf9d33203840bcb99aed08039f4b2, type: 3}
   - {fileID: 8300000, guid: feb770838933e41d998a38c3487bc8e2, type: 3}
   - {fileID: 8300000, guid: a1099e5712981486cbb82f39a4e03d29, type: 3}
   - {fileID: 8300000, guid: fbcbaa749d51a498eb362586f7aa4255, type: 3}

@@ -27,11 +27,7 @@ public class ActionDemoManager : MonoBehaviour {
 		this.position_list.Add(GameObject.Find("bottom_left").transform.position);
 		this.position_list.Add(GameObject.Find("bottom_center").transform.position);
 		this.position_list.Add(GameObject.Find("bottom_right").transform.position);
-		this.position_list.Add(new Vector3(222, 125, 0));
-
-//		List<ActionManager.Icon> order = new List<ActionManager.Icon>{ (ActionManager.Icon)0, (ActionManager.Icon)2, ActionManager.Icon.POINTER_UP, (ActionManager.Icon)3, (ActionManager.Icon)5, (ActionManager.Icon)5, (ActionManager.Icon)3 };
-//		float time = 10.0f;
-//		Next (order, "", time);
+		this.position_list.Add(GameObject.Find("middle_center").transform.position);
 	}
 	
 	// Update is called once per frame
@@ -69,6 +65,17 @@ public class ActionDemoManager : MonoBehaviour {
 			movepath [0] = this.position_list[(int)ActionManager.Icon.MIDDLE_CENTER];
 			movepath [1] = this.position_list[current];
 		}
+		// Vector3[] movepath = new Vector3[4];
+		// if(current != (int)ActionManager.Icon.POINTER_UP) {
+		// 	movepath [0] = new Vector3(this.position_list[current].x - this.position_list[current].x,
+		// 	                           this.position_list[current].y - this.position_list[current].y,
+		// 	                           this.position_list[current].z) - this.position_list[current].z;
+		// 	movepath [1] = this.position_list[(int)ActionManager.Icon.MIDDLE_CENTER];
+		// 	movepath [2] = new Vector3(this.position_list[current].x - this.position_list[current].x,
+		// 	                           this.position_list[current].y - this.position_list[current].y,
+		// 	                           this.position_list[current].z - this.position_list[current].z);
+		// 	movepath [3] = this.position_list[current];
+		// }
 			
 		if (current == (int)ActionManager.Icon.POINTER_UP) {
 			//タップ演出
@@ -121,7 +128,7 @@ public class ActionDemoManager : MonoBehaviour {
 	}
 
 	private void FinishDemo(){
-		this.hand.transform.position = new Vector3(0, 300, 0);
+		this.hand.transform.position = new Vector3(0, 3000, 0);
 		Debug.Log ("FinishDemo");
 		stageManager.FinishDemo();
 	}
