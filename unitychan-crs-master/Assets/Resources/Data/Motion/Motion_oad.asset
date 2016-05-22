@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Name: Motion_oad
   m_EditorClassIdentifier: 
   _name: MotionOad
-  _startTimePoint: 5
   _demoTime: 5
   _actionTimeLimit: 30
   _order: 0000000002000000ffffffff02000000ffffffff0200000000000000ffffffff00000000
