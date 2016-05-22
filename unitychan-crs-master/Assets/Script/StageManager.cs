@@ -37,6 +37,8 @@ public class StageManager : MonoBehaviour {
 		actionCheck = false;
 
 		resultLoaded = false; 
+
+		GameManager.Instance.ResetScore ();
 	}
 
 	void Update () {			

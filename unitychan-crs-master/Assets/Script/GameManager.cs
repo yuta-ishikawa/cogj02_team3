@@ -32,6 +32,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 		}
 	}
 
+	public void ResetScore() {
+		for (int i = 0; i < (int)JudgementState.JUDGEMENT_STATE_NUM; i++) {
+			scoreList.Add (0);
+		}
+	}
+
 	public void AddScore(JudgementState judge) {
 		scoreList [(int)judge]++;
 	}
