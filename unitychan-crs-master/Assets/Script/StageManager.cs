@@ -31,16 +31,7 @@ public class StageManager : MonoBehaviour {
 		actionCheck = false;
 	}
 
-	private bool startDemo = false;
-	// Update is called once per frame
-	void Update () {
-		// 出現条件に応じて、お手本開始
-		//DEBUG
-		if (startDemo) {
-			StartNextDemo ();
-			startDemo = false;
-		}
-			
+	void Update () {			
 		float musicTime = music.time;
 		foreach (var motionOrder in motionOrders) {
 			if (! motionOrder.hasUsed) {
@@ -56,6 +47,7 @@ public class StageManager : MonoBehaviour {
 					motionOrder.hasUsed = true;
 					currentMotionOrder = motionOrder.motionOrderObject;
 					StartNextDemo ();
+					StartNextAction ();	//同時並行で入力も受け付ける仕様に変更
 				}
 			}
 		}
@@ -66,8 +58,6 @@ public class StageManager : MonoBehaviour {
 	}
 
 	public void FinishDemo() {
-		// お手本が終わったらアクション開始
-		StartNextAction();
 	}
 
 	void StartNextAction() {
