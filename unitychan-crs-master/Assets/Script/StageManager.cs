@@ -73,13 +73,13 @@ public class StageManager : MonoBehaviour {
 	public void SuccessAction() {
 		float remainTimeRate = timeManager.GetRemainTimeRate ();
 		GameManager.JudgementState judge;
-		if (remainTimeRate > 0.7f) {
+		if (remainTimeRate > 0.3f) {
 			judge = GameManager.JudgementState.PERFECT;
-		} else if (remainTimeRate > 0.5f) {
+		} else if (remainTimeRate > 0.2f) {
 			judge = GameManager.JudgementState.GREAT;
-		} else if (remainTimeRate > 0.3f) {
-			judge = GameManager.JudgementState.GOOD;
 		} else if (remainTimeRate > 0.1f) {
+			judge = GameManager.JudgementState.GOOD;
+		} else if (remainTimeRate > 0.05f) {
 			judge = GameManager.JudgementState.POOR;
 		} else {
 			judge = GameManager.JudgementState.BAD;

@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : SingletonMonoBehaviour<GameManager> {
 
 	public enum JudgementState{
-		MISS,
-		BAD,
-		POOR,
-		GOOD,
-		GREAT,
-		PERFECT,
+		MISS,		//0点
+		BAD,		//2点
+		POOR,		//4点
+		GOOD,		//6点
+		GREAT,		//8点
+		PERFECT,	//10点
 		JUDGEMENT_STATE_NUM,
 	}
 
@@ -29,7 +29,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	}
 
 	public int GetScore() {
-		return 0;		//TODO
+		int score = 0;
+		for (int i = 0; i < (int)JudgementState.JUDGEMENT_STATE_NUM; i++) {
+			score += scoreList[i] * i * 2;
+		}
+		return score;
 	}
 
 	public List<int> GetScoreList() {
