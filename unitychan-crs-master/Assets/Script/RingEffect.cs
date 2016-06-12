@@ -20,7 +20,6 @@ public class RingEffect : MonoBehaviour {
 	}
 
 	private void SetRingEffectAlpha(float alpha) {
-		Debug.Log ("SetRingEffectAlpha:" + alpha);
 		this.GetComponent<Image> ().color = new Vector4 (255, 255, 255, alpha);
 	}
 }

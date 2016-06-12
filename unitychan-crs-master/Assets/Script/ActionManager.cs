@@ -31,8 +31,20 @@ public class ActionManager : MonoBehaviour {
 	}
 
 	private StageManager stageManager;
-	private bool actionCheck;
+	private bool _actionCheck;
+	private bool actionCheck {
+		get {
+			return _actionCheck; 
+		}
+		set {
+			_actionCheck = value; 
+			SetIconsAlpha (value ? this.defaultIconAlpha : this.defaultIconUnactiveAlpha);
+		}
+	}
 	private bool hasDowned;
+
+	private float defaultIconAlpha = 0.9f;
+	private float defaultIconUnactiveAlpha = 0.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -58,12 +70,6 @@ public class ActionManager : MonoBehaviour {
 
 		actionCheck = false;
 		input_order_list = new List<Icon> ();
-	}
-
-
-	// Update is called once per frame
-	void Update () {
-
 	}
 
 	void ResetInput()
@@ -126,7 +132,7 @@ public class ActionManager : MonoBehaviour {
 		if (actionCheck) {
 			input_order_list.Add (icon_enum);
 			if (tap_object == null) tap_object = icon;
-			FadeInIcon();
+//			FadeInIcon();
 			DebugInput ();
 
 			int result = Compare ();
@@ -145,11 +151,9 @@ public class ActionManager : MonoBehaviour {
 	}
 
 	private void FadeInIcon() {
-		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", 0.3f, "delay", 0, "loopType", "none", "onupdate", "SetIconValue", "oncomplete", "FadeComplete"));
+		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", defaultIconAlpha, "time", 0.3f, "delay", 0, "loopType", "none", "onupdate", "SetIconValue", "oncomplete", "FadeComplete"));
 	}
-	private void FadeOutIcon() {
-		iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", 0.5f, "delay", 0, "loopType", "none", "onupdate", "SetIconValue"));
-	}
+
 	private void SetIconValue(float alpha) {
 		// iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
 		if (tap_object != null) {
@@ -199,5 +203,14 @@ public class ActionManager : MonoBehaviour {
 	public void TimeUp() {
 		actionCheck = false;
 		ResetInput();
+	}
+
+	private void SetIconsAlpha(float alpha) {
+		top_left.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		top_center.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		top_right.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		bottom_left.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		bottom_center.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		bottom_right.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
 	}
 }
