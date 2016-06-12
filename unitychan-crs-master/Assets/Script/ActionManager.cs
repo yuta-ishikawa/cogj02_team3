@@ -16,6 +16,9 @@ public class ActionManager : MonoBehaviour {
 	private List<Icon> input_order_list;
 	private GameObject tap_object;
 
+	[SerializeField]
+	private GameObject ringEffect;
+
 	public enum Icon{
 		POINTER_UP = -1,
 		TOP_LEFT,
@@ -81,10 +84,15 @@ public class ActionManager : MonoBehaviour {
 		pointer_up.eventID = EventTriggerType.PointerUp;
 		pointer_up.callback.AddListener( (x) => { Event(Icon.POINTER_UP, EventTriggerType.PointerUp, icon);} );
 
+		EventTrigger.Entry cancel = new EventTrigger.Entry();
+		pointer_up.eventID = EventTriggerType.Cancel;
+		pointer_up.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.Cancel, icon);} );
+
 		EventTrigger trigger = icon.GetComponent<EventTrigger>();
 		trigger.triggers.Add(entry);
 		trigger.triggers.Add(pointer_down);
 		trigger.triggers.Add(pointer_up);
+		trigger.triggers.Add(cancel);
 	}
 
 	void Event(Icon icon_enum, EventTriggerType eventType, GameObject icon)
@@ -101,9 +109,18 @@ public class ActionManager : MonoBehaviour {
 		case EventTriggerType.PointerUp:
 			hasDowned = false;
 			break;
+		case EventTriggerType.Cancel:
+//			hasDowned = false;
+			return;
+			break;
 		default:
 			Debug.LogAssertion ("Event Error. Type:" + eventType);
 			break;
+		}
+
+		if (actionCheck && (eventType == EventTriggerType.PointerEnter || eventType == EventTriggerType.PointerDown)) {
+			GameObject obj = Instantiate (this.ringEffect, icon.transform.position, icon.transform.localRotation) as GameObject;
+			obj.transform.SetParent (this.transform);
 		}
 
 		if (actionCheck) {
@@ -128,11 +145,9 @@ public class ActionManager : MonoBehaviour {
 	}
 
 	private void FadeInIcon() {
-		// SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
 		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", 0.3f, "delay", 0, "loopType", "none", "onupdate", "SetIconValue", "oncomplete", "FadeComplete"));
 	}
 	private void FadeOutIcon() {
-		// SetValue()を毎フレーム呼び出して、１秒間に１から０までの値の中間値を渡す
 		iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", 0.5f, "delay", 0, "loopType", "none", "onupdate", "SetIconValue"));
 	}
 	private void SetIconValue(float alpha) {
