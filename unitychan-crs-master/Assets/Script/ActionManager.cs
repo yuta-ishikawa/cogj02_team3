@@ -16,6 +16,9 @@ public class ActionManager : MonoBehaviour {
 	private List<Icon> input_order_list;
 	private GameObject tap_object;
 
+	[SerializeField]
+	private GameObject ringEffect;
+
 	public enum Icon{
 		POINTER_UP = -1,
 		TOP_LEFT,
@@ -28,8 +31,20 @@ public class ActionManager : MonoBehaviour {
 	}
 
 	private StageManager stageManager;
-	private bool actionCheck;
+	private bool _actionCheck;
+	private bool actionCheck {
+		get {
+			return _actionCheck; 
+		}
+		set {
+			_actionCheck = value; 
+			SetIconsAlpha (value ? this.defaultIconAlpha : this.defaultIconUnactiveAlpha);
+		}
+	}
 	private bool hasDowned;
+
+	private float defaultIconAlpha = 0.9f;
+	private float defaultIconUnactiveAlpha = 0.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -57,12 +72,6 @@ public class ActionManager : MonoBehaviour {
 		input_order_list = new List<Icon> ();
 	}
 
-
-	// Update is called once per frame
-	void Update () {
-
-	}
-
 	void ResetInput()
 	{
 		input_order_list.Clear();
@@ -81,10 +90,15 @@ public class ActionManager : MonoBehaviour {
 		pointer_up.eventID = EventTriggerType.PointerUp;
 		pointer_up.callback.AddListener( (x) => { Event(Icon.POINTER_UP, EventTriggerType.PointerUp, icon);} );
 
+		EventTrigger.Entry cancel = new EventTrigger.Entry();
+		pointer_up.eventID = EventTriggerType.Cancel;
+		pointer_up.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.Cancel, icon);} );
+
 		EventTrigger trigger = icon.GetComponent<EventTrigger>();
 		trigger.triggers.Add(entry);
 		trigger.triggers.Add(pointer_down);
 		trigger.triggers.Add(pointer_up);
+		trigger.triggers.Add(cancel);
 	}
 
 	void Event(Icon icon_enum, EventTriggerType eventType, GameObject icon)
@@ -101,15 +115,24 @@ public class ActionManager : MonoBehaviour {
 		case EventTriggerType.PointerUp:
 			hasDowned = false;
 			break;
+		case EventTriggerType.Cancel:
+//			hasDowned = false;
+			return;
+			break;
 		default:
 			Debug.LogAssertion ("Event Error. Type:" + eventType);
 			break;
 		}
 
+		if (actionCheck && (eventType == EventTriggerType.PointerEnter || eventType == EventTriggerType.PointerDown)) {
+			GameObject obj = Instantiate (this.ringEffect, icon.transform.position, icon.transform.localRotation) as GameObject;
+			obj.transform.SetParent (this.transform);
+		}
+
 		if (actionCheck) {
 			input_order_list.Add (icon_enum);
 			if (tap_object == null) tap_object = icon;
-			FadeInIcon();
+//			FadeInIcon();
 			DebugInput ();
 
 			int result = Compare ();
@@ -128,13 +151,9 @@ public class ActionManager : MonoBehaviour {
 	}
 
 	private void FadeInIcon() {
-		// SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
-		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", 0.3f, "delay", 0, "loopType", "none", "onupdate", "SetIconValue", "oncomplete", "FadeComplete"));
+		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", defaultIconAlpha, "time", 0.3f, "delay", 0, "loopType", "none", "onupdate", "SetIconValue", "oncomplete", "FadeComplete"));
 	}
-	private void FadeOutIcon() {
-		// SetValue()を毎フレーム呼び出して、１秒間に１から０までの値の中間値を渡す
-		iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", 0.5f, "delay", 0, "loopType", "none", "onupdate", "SetIconValue"));
-	}
+
 	private void SetIconValue(float alpha) {
 		// iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
 		if (tap_object != null) {
@@ -184,5 +203,14 @@ public class ActionManager : MonoBehaviour {
 	public void TimeUp() {
 		actionCheck = false;
 		ResetInput();
+	}
+
+	private void SetIconsAlpha(float alpha) {
+		top_left.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		top_center.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		top_right.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		bottom_left.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		bottom_center.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		bottom_right.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
 	}
 }

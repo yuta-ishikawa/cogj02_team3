@@ -6598,7 +6598,7 @@ public class iTween : MonoBehaviour{
 		if(tweenArguments.Contains("looktarget") && isRunning){
 			if(type =="move" || type =="shake" || type=="punch"){
 				LookUpdate(gameObject,tweenArguments);
-			}			
+			}
 		}
 	}
 	
