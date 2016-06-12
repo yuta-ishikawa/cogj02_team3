@@ -7,6 +7,7 @@ public class ActionDemoManager : MonoBehaviour {
 
 	private StageManager stageManager;
 	private GameObject hand;
+	private Text handCount;
 	private List<Vector3> position_list = new List<Vector3>();
 	private Vector3 top_left;
 	private Vector3 top_center;
@@ -20,6 +21,8 @@ public class ActionDemoManager : MonoBehaviour {
 	void Start () {
 		stageManager = GameObject.FindObjectOfType<StageManager> ();
 		this.hand = GameObject.Find ("hand");
+		this.handCount = this.hand.transform.FindChild ("HandCount").GetComponent<Text>();
+		this.hand.SetActive (false);
 
 		this.position_list.Add(GameObject.Find("top_left").transform.position);
 		this.position_list.Add(GameObject.Find("top_center").transform.position);
@@ -45,32 +48,36 @@ public class ActionDemoManager : MonoBehaviour {
 		}
 	}
 
-
 	private void SimpleActionDemo(List<ActionManager.Icon> order, float one_action_time) {
+		this.hand.SetActive (true);
 		this.hand.transform.position = this.position_list[(int)order[0]];
-		for(int i =0; i<order.Count; i++){
+		this.handCount.text = "1";
+
+		for(int i = 0; i < order.Count; i++){
 			if (i == 0) {
 				SimpleAction ((int)order [i], (int)order [i], one_action_time, i);
-			} else if (order.Count - 1 > i) {
+			} else if (i < order.Count - 1) {
 				SimpleAction ((int)order [i], (int)order [i - 1], one_action_time, i);
-			} else
-				LastSimpleAction((int)order [i], (int)order [i - 1], one_action_time, i);
+			} else {
+				LastSimpleAction ((int)order [i], (int)order [i - 1], one_action_time, i);
+			}
 		}
 	}
 
-
 	private void SimpleAction(int current, int before, float time, int action_count){
 		Vector3[] movepath = new Vector3[2];
-		if(current != (int)ActionManager.Icon.POINTER_UP) {
-			movepath [0] = this.position_list[(int)ActionManager.Icon.MIDDLE_CENTER];
-			movepath [1] = this.position_list[current];
-		}
-			
+
 		if (current == (int)ActionManager.Icon.POINTER_UP) {
 			//タップ演出
 			FadeOutHand(time/2, time * action_count + time);
 			FadeInHand(time/2, time * action_count + time + time);
+			Invoke("CountUpHandCount", time * action_count + time + time/2);
+
 		} else if (isThroughCenter(current, before)) {
+			if(current != (int)ActionManager.Icon.POINTER_UP) {
+				movepath [0] = this.position_list[(int)ActionManager.Icon.MIDDLE_CENTER];
+				movepath [1] = this.position_list[current];
+			}
 			iTween.MoveTo (this.hand, iTween.Hash ("path", movepath,
 				                                   "time", time,
 				                                   "delay", time * action_count,
@@ -83,19 +90,28 @@ public class ActionDemoManager : MonoBehaviour {
 		}
 	}
 
-	private void FadeInHand(float time, float delay) {
-		// SetValue()を毎フレーム呼び出して、１秒間に０から１までの値の中間値を渡す
-		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", 0.1f, "delay", delay, "onupdate", "SetValue"));
-	}
-	private void FadeOutHand(float time, float delay) {
-		// SetValue()を毎フレーム呼び出して、１秒間に１から０までの値の中間値を渡す
-		iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", 0f, "delay", delay, "onupdate", "SetValue"));
-	}
-	private void SetValue(float alpha) {
-		// iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
-		this.hand.GetComponent<RawImage>().color = new Vector4(255, 255, 255, alpha);
+	private void CountUpHandCount() {
+		int currentHandCount = 0;
+		if (int.TryParse (this.handCount.text, out currentHandCount)) {
+			this.handCount.text = (currentHandCount + 1).ToString ();
+		}
 	}
 
+	private void FadeInHand(float time, float delay) {
+		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", 1f, "time", 0.1f, "delay", delay, "onupdate", "SetHandAlpha"));
+	}
+	private void FadeOutHand(float time, float delay) {
+		iTween.ValueTo(gameObject, iTween.Hash("from", 1f, "to", 0f, "time", 0f, "delay", delay, "onupdate", "SetHandAlpha"));
+	}
+	private void SetHandAlpha(float alpha) {
+		// iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
+		this.hand.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+
+		Vector4 color = this.hand.transform.FindChild ("HandCountBack").GetComponent<Image> ().color;
+		this.hand.transform.FindChild("HandCountBack").GetComponent<Image> ().color = new Vector4 (color.x, color.y, color.z, alpha);
+		color = this.handCount.GetComponent<Text> ().color;
+		this.handCount.GetComponent<Text> ().color = new Vector4 (color.x, color.y, color.z, alpha);
+	}
 
 	private void LastSimpleAction(int current, int before, float time, int action_count){
 		iTween.MoveTo(this.hand, iTween.Hash("position", this.position_list[current],
@@ -117,7 +133,7 @@ public class ActionDemoManager : MonoBehaviour {
 	}
 
 	private void FinishDemo(){
-		this.hand.transform.position = new Vector3(0, 3000, 0);
+		this.hand.SetActive (false);
 		Debug.Log ("FinishDemo");
 		stageManager.FinishDemo();
 	}
