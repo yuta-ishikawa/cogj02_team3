@@ -15,14 +15,18 @@ public class UnityChanTensionStatus : MonoBehaviour {
 	private int GetTensionStatus()
 	{
 		int score = GameManager.Instance.GetScore();
-		int spriteNum = 0;
+		int spriteNum = -1;
 		// 現在のスコアに応じた値を返す
 		// スコアが良いほどループが長くなる
 		foreach (var num in tensionTable.table)
 		{
-			if (score <= num) return spriteNum;
-			++spriteNum;
+			if (num <= score) {
+				++spriteNum;
+			} else {
+				break;
+			}
 		}
+		spriteNum = Mathf.Clamp (spriteNum, 0, 4);
 		return spriteNum;
 	}
 

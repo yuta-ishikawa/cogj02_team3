@@ -18,7 +18,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	private List<int> scoreList;
 
 	void Start () {
+		if(this != Instance)
+		{
+			Destroy(this);
+			return;
+		}
+
+		DontDestroyOnLoad(this.gameObject);
+
 		scoreList = new List<int> ();
+		for (int i = 0; i < (int)JudgementState.JUDGEMENT_STATE_NUM; i++) {
+			scoreList.Add (0);
+		}
+	}
+
+	public void ResetScore() {
 		for (int i = 0; i < (int)JudgementState.JUDGEMENT_STATE_NUM; i++) {
 			scoreList.Add (0);
 		}

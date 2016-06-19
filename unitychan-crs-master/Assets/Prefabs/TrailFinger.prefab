@@ -11,7 +11,7 @@ GameObject:
   - 198: {fileID: 19808268}
   - 199: {fileID: 19922676}
   - 114: {fileID: 11440006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TrailFinger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

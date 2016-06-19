@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 
 public class ActionManager : MonoBehaviour {
@@ -13,6 +14,10 @@ public class ActionManager : MonoBehaviour {
 	private GameObject bottom_right;
 	private List<Icon> action_order_list;
 	private List<Icon> input_order_list;
+	private GameObject tap_object;
+
+	[SerializeField]
+	private GameObject ringEffect;
 
 	public enum Icon{
 		POINTER_UP = -1,
@@ -26,8 +31,20 @@ public class ActionManager : MonoBehaviour {
 	}
 
 	private StageManager stageManager;
-	private bool actionCheck;
+	private bool _actionCheck;
+	private bool actionCheck {
+		get {
+			return _actionCheck; 
+		}
+		set {
+			_actionCheck = value; 
+			SetIconsAlpha (value ? this.defaultIconAlpha : this.defaultIconUnactiveAlpha);
+		}
+	}
 	private bool hasDowned;
+
+	private float defaultIconAlpha = 0.9f;
+	private float defaultIconUnactiveAlpha = 0.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -55,12 +72,6 @@ public class ActionManager : MonoBehaviour {
 		input_order_list = new List<Icon> ();
 	}
 
-
-	// Update is called once per frame
-	void Update () {
-
-	}
-
 	void ResetInput()
 	{
 		input_order_list.Clear();
@@ -69,23 +80,28 @@ public class ActionManager : MonoBehaviour {
 	void RegisterEvent(GameObject icon, Icon icon_enum) {
 		EventTrigger.Entry entry = new EventTrigger.Entry();
 		entry.eventID = EventTriggerType.PointerEnter;
-		entry.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.PointerEnter);} );
+		entry.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.PointerEnter, icon);} );
 
 		EventTrigger.Entry pointer_down = new EventTrigger.Entry();
 		pointer_down.eventID = EventTriggerType.PointerDown;
-		pointer_down.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.PointerDown);} );
+		pointer_down.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.PointerDown, icon);} );
 
 		EventTrigger.Entry pointer_up = new EventTrigger.Entry();
 		pointer_up.eventID = EventTriggerType.PointerUp;
-		pointer_up.callback.AddListener( (x) => { Event(Icon.POINTER_UP, EventTriggerType.PointerUp);} );
+		pointer_up.callback.AddListener( (x) => { Event(Icon.POINTER_UP, EventTriggerType.PointerUp, icon);} );
+
+		EventTrigger.Entry cancel = new EventTrigger.Entry();
+		pointer_up.eventID = EventTriggerType.Cancel;
+		pointer_up.callback.AddListener( (x) => { Event(icon_enum, EventTriggerType.Cancel, icon);} );
 
 		EventTrigger trigger = icon.GetComponent<EventTrigger>();
 		trigger.triggers.Add(entry);
 		trigger.triggers.Add(pointer_down);
 		trigger.triggers.Add(pointer_up);
+		trigger.triggers.Add(cancel);
 	}
 
-	void Event(Icon icon_enum, EventTriggerType eventType)
+	void Event(Icon icon_enum, EventTriggerType eventType, GameObject icon)
 	{
 		switch (eventType) {
 		case EventTriggerType.PointerEnter:
@@ -99,13 +115,24 @@ public class ActionManager : MonoBehaviour {
 		case EventTriggerType.PointerUp:
 			hasDowned = false;
 			break;
+		case EventTriggerType.Cancel:
+//			hasDowned = false;
+			return;
+			break;
 		default:
 			Debug.LogAssertion ("Event Error. Type:" + eventType);
 			break;
 		}
 
+		if (actionCheck && (eventType == EventTriggerType.PointerEnter || eventType == EventTriggerType.PointerDown)) {
+			GameObject obj = Instantiate (this.ringEffect, icon.transform.position, icon.transform.localRotation) as GameObject;
+			obj.transform.SetParent (this.transform);
+		}
+
 		if (actionCheck) {
 			input_order_list.Add (icon_enum);
+			if (tap_object == null) tap_object = icon;
+//			FadeInIcon();
 			DebugInput ();
 
 			int result = Compare ();
@@ -121,6 +148,21 @@ public class ActionManager : MonoBehaviour {
 				ResetInput ();
 			}
 		}
+	}
+
+	private void FadeInIcon() {
+		iTween.ValueTo(gameObject, iTween.Hash("from", 0f, "to", defaultIconAlpha, "time", 0.3f, "delay", 0, "loopType", "none", "onupdate", "SetIconValue", "oncomplete", "FadeComplete"));
+	}
+
+	private void SetIconValue(float alpha) {
+		// iTweenで呼ばれたら、受け取った値をImageのアルファ値にセット
+		if (tap_object != null) {
+			this.tap_object.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		}
+	}
+
+	void FadeComplete() {
+		tap_object = null;
 	}
 
 	int Compare(){
@@ -161,5 +203,14 @@ public class ActionManager : MonoBehaviour {
 	public void TimeUp() {
 		actionCheck = false;
 		ResetInput();
+	}
+
+	private void SetIconsAlpha(float alpha) {
+		top_left.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		top_center.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		top_right.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		bottom_left.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		bottom_center.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
+		bottom_right.GetComponent<RawImage> ().color = new Vector4 (255, 255, 255, alpha);
 	}
 }

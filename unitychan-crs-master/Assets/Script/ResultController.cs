@@ -26,7 +26,7 @@ public class ResultController : MonoBehaviour {
 	private TensionTableObject tensionTable;
 
 	//private 
-	private string[] resultRankStr = { "TooBad", "Bad", "Good", "Great", "Perfect" };
+	private string[] resultRankStr = { "C", "B", "A", "S", "SSS" };
 
 	static private ResultScoreRank rank = ResultScoreRank.None;
 
@@ -38,12 +38,22 @@ public class ResultController : MonoBehaviour {
 		// ここでリザルトの情報を確定させる
 		scoreResult.SetActive(false);
 
+		// テンション結果からランク決定
+		int tmp = -1;
+		foreach (var num in tensionTable.table)
+		{
+			if (num > GameManager.Instance.GetScore()) break;
+			++tmp;
+		}
+		tmp = Mathf.Clamp (tmp, 0, 4);
+		rank = (ResultScoreRank)tmp;
+
 		// デバッグ用
 		// リストが空ならデフォルトの値を使う
 		if (FindObjectOfType<GameManager>() == null) return;
 		List<int> scoreList = GameManager.Instance.GetScoreList();
 		
-		scoreText.text = resultRankStr[4] + Environment.NewLine + 
+		scoreText.text = resultRankStr[(int)rank] + Environment.NewLine + 
 			GameManager.Instance.GetScore() + Environment.NewLine +	Environment.NewLine +
 			scoreList[5] + Environment.NewLine +
 			scoreList[4] + Environment.NewLine +
@@ -52,14 +62,6 @@ public class ResultController : MonoBehaviour {
 			scoreList[1] + Environment.NewLine +
 			scoreList[0];
 
-		// テンション結果からランク決定
-		int tmp = 0;
-		foreach (var num in tensionTable.table)
-		{
-			if (num <= GameManager.Instance.GetScore()) break;
-			++tmp;
-		}
-		rank = (ResultScoreRank)tmp;
 
 		faceChanger.SetFaceImage(rank);
 		resultVoice.SetVoice(rank);

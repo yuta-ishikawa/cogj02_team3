@@ -37,17 +37,20 @@ public class StageManager : MonoBehaviour {
 		actionCheck = false;
 
 		resultLoaded = false; 
+
+		GameManager.Instance.ResetScore ();
 	}
 
 	void Update () {			
 		float musicTime = music.time;
 
-		if (musicTime > 103 && !resultLoaded) {
+		if (musicTime > 103 && !resultLoaded) {	//103
 			resultLoaded = true;
 			ScreenFadeManager.Instance.FadeIn(fadeParam.time, fadeParam.color,
 				delegate {
 					Debug.Log("Fade In OK");
 					SceneManager.LoadScene("Result");
+					iTween.tweens.Clear();
 					// メインに遷移後すぐにFadeOutを完了させる
 					ScreenFadeManager.Instance.FadeOut(0.01f, new Color(1.0f, 1.0f, 1.0f), delegate { Debug.Log("OK"); });
 				});
